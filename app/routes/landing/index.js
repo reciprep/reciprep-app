@@ -5,12 +5,6 @@ import { Button, FormLabel, FormInput } from 'react-native-elements';
 import LogIn  from './login';
 import SignUp  from './signup';
 
-var CustomTransitions = Object.assign( {}, Navigator.SceneConfigs.FadeAndroid, {
-  gestures: null,
-  defaultTransitionVelocity: 1000,
-
-});
-
 export class Landing extends Component {
 
   _renderScene(route,navigator){

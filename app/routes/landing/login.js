@@ -3,16 +3,11 @@ import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 
-someFunction = () =>{
-
-}
+someFunction = () =>{}
 
 loginFunction = ()=> {
   Alert.alert('Logn Functionality Not Implemented Yet');
 };
-
-
-
 
 export class LogIn extends Component {
 

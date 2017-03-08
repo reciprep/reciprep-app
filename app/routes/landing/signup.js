@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
-someFunction = () =>{
-
-}
-
-
-
+someFunction = () =>{}
 
 export class SignUp extends Component {
 

@@ -7,9 +7,7 @@ import {
   View
 } from 'react-native';
 
-
-import ToolbarMain from './app/components/ToolbarMain';
-import Landing from './app/routes/landing/index';
+import Landing from './app/routes/landing';
 
 export default class ReciPrep extends Component {
   render() {
