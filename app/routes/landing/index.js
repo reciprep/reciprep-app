@@ -5,6 +5,11 @@ import { Button, FormLabel, FormInput } from 'react-native-elements';
 import LogIn  from './login';
 import SignUp  from './signup';
 
+var CustomTransitions = Object.assign( {}, Navigator.SceneConfigs.FadeAndroid, {
+  gestures: null,
+  defaultTransitionVelocity: 1000,
+
+});
 
 export class Landing extends Component {
 
@@ -18,8 +23,9 @@ export class Landing extends Component {
   }
 
   _configureScene(route,routeStack){
-    return Navigator.SceneConfigs.FadeAndroid
+    return Navigator.SceneConfigs.FloatFromBottom
   }
+
   render(){
     return(
       <View style={styles.page}>
@@ -30,9 +36,7 @@ export class Landing extends Component {
           style={{flex:3}}
           initialRoute={{index: 0 }}
           renderScene={this._renderScene}
-          configureScence={(route,routeStack) =>
-            Navigator.SceneConfigs.FloatFromBottomAndroid
-          }
+          configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
         />
       </View>
 

@@ -9,7 +9,7 @@ import {
 
 
 import ToolbarMain from './app/components/ToolbarMain';
-import Landing from './app/routes/landing';
+import Landing from './app/routes/landing/index';
 
 export default class ReciPrep extends Component {
   render() {
