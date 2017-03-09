@@ -8,11 +8,14 @@ import SignUp  from './signup';
 export class Landing extends Component {
 
   _renderScene(route,navigator){
-    if (route.index==0){
+    if (route.index=='login'){
       return <LogIn navigator={navigator}/>
     }
-    else if (route.index ==1){
+    else if (route.index =='signup'){
       return <SignUp navigator={navigator}/>;
+    }
+    else{
+      //how to do error logging
     }
   }
 
@@ -28,7 +31,7 @@ export class Landing extends Component {
         </View>
         <Navigator
           style={{flex:3}}
-          initialRoute={{index: 0 }}
+          initialRoute={{index: 'login' }}
           renderScene={this._renderScene}
           configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
         />

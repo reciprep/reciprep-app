@@ -3,35 +3,56 @@ import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 
-someFunction = () =>{}
-
-loginFunction = ()=> {
-  Alert.alert('Logn Functionality Not Implemented Yet');
-};
-
 export class LogIn extends Component {
 
-  _signupFunction = () => {
-    this.props.navigator.push({index:1})
+  _loginFunction = ()=> {
+    fetch('http://localhost:8000/api/auth/login',{
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.username,
+        password: this.password,
+      })
+    })
+    .catch( (error) => {
+      console.error(error);
+    });
   };
+
+  _signupFunction = () => {
+    this.props.navigator.push({index: 'signup'})
+  };
+
+  state: {
+   username: string,
+   password: string
+ };
+
+ constructor(){
+   super();
+   this.state = {
+     username: "",
+     password: ""
+   };
+ }
+
 
   render(){
     return(
       <View style={styles.loginView}>
         <View style={styles.inputGroup}>
           <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={someFunction}/>
+          <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
         </View>
         <View style={styles.inputGroup}>
           <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={someFunction}/>
+          <FormInput inputStyle={styles.inputText} onChangeText={(password) => this.setState({password})}/>
         </View>
         <Button
           title='Login'
           buttonStyle={styles.loginButton}
           raised
           underlayColor = 'blue'
-          onPress={loginFunction}/>
+          onPress={this._loginFunction}/>
         <Button
           title='Signup'
           buttonStyle={styles.signupButton}

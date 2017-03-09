@@ -2,32 +2,57 @@ import React, { Component } from 'react';
 import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
-someFunction = () =>{}
 
 export class SignUp extends Component {
 
   _signupFunction = () => {
+    fetch('http://localhost:8000/api/auth/register',{
+      method: 'POST',
+      body: JSON.stringify({
+        email: this.email,
+        username: this.username,
+        password: this.password,
+      })
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
     this.props.navigator.pop();
   };
+
+  state: {
+   username: string,
+   email: string,
+   password: string
+ };
+
+ constructor(){
+   super();
+   this.state = {
+     username: "",
+     email: "",
+     password: ""
+   };
+ }
 
   render(){
     return(
       <View style={styles.loginView}>
         <View style={styles.inputGroup}>
           <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={someFunction}/>
+          <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
         </View>
         <View style={styles.inputGroup}>
           <FormLabel labelStyle={styles.inputLabel}>Email</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={someFunction}/>
+          <FormInput inputStyle={styles.inputText} onChangeText={(email) => this.setState({email})}/>
         </View>
         <View style={styles.inputGroup}>
           <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={someFunction}/>
+          <FormInput inputStyle={styles.inputText} onChangeText={(password) => this.setState({password})}/>
         </View>
         <View style={styles.inputGroup}>
           <FormLabel labelStyle={styles.inputLabel}>Confirm Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={someFunction}/>
+          <FormInput inputStyle={styles.inputText} onChangeText={(password) => this.setState({password})}/>
         </View>
 
         <Button
