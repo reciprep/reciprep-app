@@ -6,12 +6,20 @@ import { Button, FormLabel, FormInput } from 'react-native-elements';
 export class LogIn extends Component {
 
   _loginFunction = ()=> {
-    fetch('http://localhost:8000/api/auth/login',{
+    fetch('http://10.0.2.2:8000/api/auth/login',{
       method: 'POST',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
       body: JSON.stringify({
         username: this.username,
-        password: this.password,
+        password: this.password
       })
+    })
+    .then( (response) => response.json())
+    .then( (responseData) => {
+      console.log('request succeeded with response', responseData);
     })
     .catch( (error) => {
       console.error(error);

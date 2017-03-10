@@ -6,13 +6,20 @@ import { Button, FormLabel, FormInput } from 'react-native-elements';
 export class SignUp extends Component {
 
   _signupFunction = () => {
-    fetch('http://localhost:8000/api/auth/register',{
+    fetch('http://10.0.2.2:8000/api/auth/register',{
       method: 'POST',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
       body: JSON.stringify({
         email: this.email,
         username: this.username,
         password: this.password,
       })
+    })
+    .then((json) => {
+      conosle.log('request succeeded with response', json);
     })
     .catch( (error) => {
       console.log(error);
