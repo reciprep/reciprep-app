@@ -13,8 +13,8 @@ export class LogIn extends Component {
         'Content-Type':'application/json'
       },
       body: JSON.stringify({
-        username: this.username,
-        password: this.password
+        'username': this.state.username,
+        'password': this.state.password
       })
     })
     .then( (response) => response.json())

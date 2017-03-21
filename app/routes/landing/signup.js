@@ -13,13 +13,13 @@ export class SignUp extends Component {
         'Content-Type':'application/json'
       },
       body: JSON.stringify({
-        email: this.email,
-        username: this.username,
-        password: this.password,
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
       })
     })
     .then((json) => {
-      conosle.log('request succeeded with response', json);
+      console.log('request succeeded with response', json);
     })
     .catch( (error) => {
       console.log(error);
