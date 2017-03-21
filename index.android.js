@@ -7,15 +7,13 @@ import {
   View
 } from 'react-native';
 
-
-import ToolbarMain from './app/components/ToolbarMain';
-import LogIn from './app/routes/LogIn';
+import Landing from './app/routes/landing';
 
 export default class ReciPrep extends Component {
   render() {
     return (
       <View style={styles.mainView}>
-        <LogIn/>
+        <Landing/>
       </View>
     );
   }
