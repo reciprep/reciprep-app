@@ -53,7 +53,7 @@ export class LogIn extends Component {
         </View>
         <View style={styles.inputGroup}>
           <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={(password) => this.setState({password})}/>
+          <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
         </View>
         <Button
           title='Login'
