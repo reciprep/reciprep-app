@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Navigator, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView} from 'react-native';
 import { Button, SearchBar, Icon, Card } from 'react-native-elements';
 
 import RecipeCard from '../../components/recipeCard'
@@ -57,6 +57,14 @@ export class RecipeFeed extends Component{
     //todo implement filter
   }
 
+  constructor(props){
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows(recipes)
+    };
+  }
+
   render(){
     return(
       <View style={styles.container}>
@@ -79,19 +87,14 @@ export class RecipeFeed extends Component{
             containerStyle={styles.iconContainer}/>
         </View>
         <View style={styles.feed}>
-          <ScrollView>
-            {
-              recipes.map(function(r,i){
-                return(
-                    <RecipeCard
-                      key={i}
-                      title={r.title}
-                      imageSource={r.imageSource}
-                      description={r.description} />
-                );
-              })
-            }
-          </ScrollView>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(rowData) =>
+              <RecipeCard
+                title={rowData.title}
+                imageSource={rowData.imageSource}
+                description={rowData.description} />
+            }/>
         </View>
       </View>
     );
