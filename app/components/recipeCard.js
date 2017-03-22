@@ -1,0 +1,54 @@
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Card } from 'react-native-elements';
+
+import RecipeFeedStarRating from './recipeFeedStarRating';
+
+export class RecipeCard extends Component{
+  render(){
+    return(
+      <Card
+        flexDirection='row'
+        containerStyle = {styles.recipeContainer} >
+        <Image
+          source={require('../images/chicken-parmigiani.jpg')}
+          style={styles.recipeImage}>
+        </Image>
+        <View style={styles.recipeInfo}>
+          <Text style={styles.recipeTitle}>Chicken Parmigana</Text>
+          <Text style={styles.recipeDescription} numberOfLines={3}> This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over</Text>
+          <RecipeFeedStarRating/>
+        </View>
+
+      </Card>
+    );
+  }
+}
+
+var styles = StyleSheet.create({
+  recipeContainer:{
+    height: 100,
+    alignSelf: 'stretch',
+    margin: 0,
+    padding: 0
+  },
+  recipeImage:{
+    flex:1,
+    height: 100,
+    margin: 0,
+    padding: 0
+  },
+  recipeInfo:{
+    flex:2
+  },
+  recipeTitle:{
+    color: 'black',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  recipeDescription:{
+
+  }
+})
+
+module.exports = RecipeCard;

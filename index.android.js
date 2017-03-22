@@ -8,12 +8,14 @@ import {
 } from 'react-native';
 
 import Landing from './app/routes/landing';
+import RecipeFeed from './app/routes/recipe_feed';
 
 export default class ReciPrep extends Component {
   render() {
     return (
       <View style={styles.mainView}>
-        <Landing/>
+        <View style={styles.placeholder}/>
+        <RecipeFeed/>
       </View>
     );
   }
@@ -22,6 +24,10 @@ export default class ReciPrep extends Component {
 var styles = StyleSheet.create({
   mainView:{
     flex: 1
+  },
+  placeholder:{
+    height:75,
+    backgroundColor: '#4ABDAC'
   }
 });
 
