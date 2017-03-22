@@ -1,8 +1,51 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Navigator, Image } from 'react-native';
+import { StyleSheet, Text, View, Navigator, Image, ScrollView } from 'react-native';
 import { Button, SearchBar, Icon, Card } from 'react-native-elements';
 
 import RecipeCard from '../../components/recipeCard'
+
+const recipes = [
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  }
+]
 
 export class RecipeFeed extends Component{
 
@@ -36,7 +79,19 @@ export class RecipeFeed extends Component{
             containerStyle={styles.iconContainer}/>
         </View>
         <View style={styles.feed}>
-          <RecipeCard/>
+          <ScrollView>
+            {
+              recipes.map(function(r,i){
+                return(
+                    <RecipeCard
+                      key={i}
+                      title={r.title}
+                      imageSource={r.imageSource}
+                      description={r.description} />
+                );
+              })
+            }
+          </ScrollView>
         </View>
       </View>
     );

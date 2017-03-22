@@ -11,12 +11,12 @@ export class RecipeCard extends Component{
         flexDirection='row'
         containerStyle = {styles.recipeContainer} >
         <Image
-          source={require('../images/chicken-parmigiani.jpg')}
+          source={this.props.imageSource}
           style={styles.recipeImage}>
         </Image>
         <View style={styles.recipeInfo}>
-          <Text style={styles.recipeTitle}>Chicken Parmigana</Text>
-          <Text style={styles.recipeDescription} numberOfLines={3}> This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over</Text>
+          <Text style={styles.recipeTitle}>{this.props.title}</Text>
+          <Text style={styles.recipeDescription} numberOfLines={3}> {this.props.description}</Text>
           <RecipeFeedStarRating/>
         </View>
 
