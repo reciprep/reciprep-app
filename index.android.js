@@ -7,13 +7,13 @@ import {
   View
 } from 'react-native';
 
-import Landing from './app/routes/landing';
+import Pantry from './app/routes/pantry';
 
 export default class ReciPrep extends Component {
   render() {
     return (
       <View style={styles.mainView}>
-        <Landing/>
+        <Pantry/>
       </View>
     );
   }
