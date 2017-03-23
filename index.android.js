@@ -7,13 +7,14 @@ import {
   View
 } from 'react-native';
 
-import Landing from './app/routes/landing';
+import Toolbar from './app/components/toolbar';
 
 export default class ReciPrep extends Component {
   render() {
     return (
       <View style={styles.mainView}>
-        <Landing/>
+        <Toolbar/>
+        <View style={{flex:8}}/>
       </View>
     );
   }
