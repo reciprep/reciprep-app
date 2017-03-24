@@ -9,8 +9,12 @@ const styles = StyleSheet.create({
   },
 });
 
+_onPressSingleRequest = (props)=>{
+  //do nothing
+  console.log(props.title)
+}
 const Row = (props) => (
-  <TouchableHighlight 
+  <TouchableHighlight
     underlayColor="#FFF"
     onPress={()=>this._onPressSingleRequest(props)}>
     <View>
