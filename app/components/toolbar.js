@@ -19,12 +19,23 @@ export class Toolbar extends Component {
 
   constructor() {
   	super();
-    this.state = {isRecipe: true};
-    console.log("test");
+    this.state = {
+      recipeColor: '#009933',
+      pantryColor: '#ccff99'};
   }
 
   setButtonState(props) {
   	this.setState({isRecipe: props});
+  };
+
+  setPantryActive () {
+    this.setState({pantryColor: '#ccff99' });
+    this.setState({recipeColor: '#009933'});
+  };
+
+  setRecipeActive () {
+    this.setState({pantryColor: '#009933' });
+    this.setState({recipeColor: '#ccff99'});
   };
 
   render(){
@@ -38,22 +49,22 @@ export class Toolbar extends Component {
                  color:'black',
                  size: 36}}
           raised
-          // onPress={this._loginFunction}
         />
         <Button
           title='Recipes'
-          // buttonColor = {true: '#ccff99' : '#009933'}
+          backgroundColor = {this.state.recipeColor}
           buttonStyle={styles.recipeButton}
           raised
           color = 'black'
-          onClick={() => this.setButtonState(true)}
+          onPress={() => this.setRecipeActive()}
         />
         <Button
           title='Pantry'
+          backgroundColor = {this.state.pantryColor}
           buttonStyle={styles.pantryButton}
           raised
           color = 'black'
-          onClick={() => this.setButtonState(false)}
+          onPress={() => this.setPantryActive()}
         />
       </View>
     )
@@ -66,7 +77,6 @@ var styles = StyleSheet.create({
 
   loginView:{
     flex:3,
-    // justifyContent: 'center'
   },
   inputGroup:{
     backgroundColor:'#DFDCE3',
@@ -82,7 +92,6 @@ var styles = StyleSheet.create({
     color: '#000000'
   },
   recipeButton:{
-  	backgroundColor:'#ccff99',
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
@@ -93,8 +102,6 @@ var styles = StyleSheet.create({
     borderLeftWidth: 1,
   },
   pantryButton:{
-  	backgroundColor:'#009933',
-  	// backgroundColor: this.isRecipe ? '#009933' : '#ccff99',
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
