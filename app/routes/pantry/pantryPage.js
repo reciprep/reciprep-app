@@ -88,7 +88,13 @@ export class PantryPage extends Component {
         <ListView
           style={styles.container}
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Row{...rowData}/> } /> 
+          renderRow={(rowData) =>
+            <Row
+              title={rowData.title}
+              icon={rowData.icon}
+              value={rowData.value}
+            /> }
+         />
       </View>
     );
   }
