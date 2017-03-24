@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import {	
-	AppRegistry, 
-	StyleSheet, 
-	TouchableHighlight, 
-	Alert, 
-	Text, 
-	View, 
-	Navigator 
+import {
+	AppRegistry,
+	StyleSheet,
+	TouchableHighlight,
+	Alert,
+	Text,
+	View,
+	Navigator
 } from 'react-native';
-import { 
-	Button, 
-	FormLabel, 
-	FormInput 
+import {
+	Button,
+	FormLabel,
+	FormInput
 } from 'react-native-elements';
 
 
@@ -23,6 +23,9 @@ export class Toolbar extends Component {
         <Button
           title=''
           buttonStyle={styles.settingsButton}
+          icon={{name:'reorder',
+                 color:'black',
+                 size: 36}}
           raised
           // onPress={this._loginFunction}
         />
@@ -37,7 +40,7 @@ export class Toolbar extends Component {
           title='Pantry'
           buttonStyle={styles.pantryButton}
           raised
-          color = 'black' 
+          color = 'black'
           // onPress={this._loginFunction}
         />
       </View>
@@ -48,7 +51,7 @@ export class Toolbar extends Component {
 module.exports = Toolbar;
 
 var styles = StyleSheet.create({
-  
+
   loginView:{
     flex:3,
     // justifyContent: 'center'
@@ -100,5 +103,3 @@ var styles = StyleSheet.create({
     borderRightWidth: 1,
   },
 });
-
-
