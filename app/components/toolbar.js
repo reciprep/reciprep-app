@@ -17,13 +17,24 @@ import {
 
 export class Toolbar extends Component {
 
+  constructor() {
+  	super();
+    this.state = {isRecipe: true};
+    console.log("test");
+  }
+
+  setButtonState(props) {
+  	this.setState({isRecipe: props});
+  };
+
   render(){
+
     return(
       <View style={{flex: 1, flexDirection: 'row'}}>
         <Button
           title=''
           buttonStyle={styles.settingsButton}
-          icon={{name:'reorder',
+          icon={{name:'menu',
                  color:'black',
                  size: 36}}
           raised
@@ -31,17 +42,18 @@ export class Toolbar extends Component {
         />
         <Button
           title='Recipes'
+          // buttonColor = {true: '#ccff99' : '#009933'}
           buttonStyle={styles.recipeButton}
           raised
           color = 'black'
-          // onPress={this._loginFunction}
+          onClick={() => this.setButtonState(true)}
         />
         <Button
           title='Pantry'
           buttonStyle={styles.pantryButton}
           raised
           color = 'black'
-          // onPress={this._loginFunction}
+          onClick={() => this.setButtonState(false)}
         />
       </View>
     )
@@ -82,6 +94,7 @@ var styles = StyleSheet.create({
   },
   pantryButton:{
   	backgroundColor:'#009933',
+  	// backgroundColor: this.isRecipe ? '#009933' : '#ccff99',
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
