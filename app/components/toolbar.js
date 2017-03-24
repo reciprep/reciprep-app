@@ -20,8 +20,8 @@ export class Toolbar extends Component {
   constructor() {
   	super();
     this.state = {
-      recipeColor: '#009933',
-      pantryColor: '#ccff99'};
+      recipeColor: '#ccff99',
+      pantryColor: '#009933'};
   }
 
   setButtonState(props) {
