@@ -12,16 +12,16 @@ export class Row extends Component{
 
   render(){
     return(
-      <TouchableHighlight
-        underlayColor="#FFF"
-        onPress={()=>this._onPressSingleRequest(this.props)}>
+      <View>
+        {/* underlayColor="#FFF" */}
+        {/* onPress={()=>this._onPressSingleRequest(this.props)}> */}
         <View>
           <ListItem
               title={this.props.title}
               LeftIcon={{name: this.props.icon}}
               badge={{value: this.props.value}}/>
         </View>
-      </TouchableHighlight>
+      </View>
     );
   }
 }

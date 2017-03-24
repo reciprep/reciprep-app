@@ -8,21 +8,7 @@ import Row from './Row';
 var ReactNative = require('react-native');
 
 const wet_Ingredients = [
-  {
-    title: 'Chicken Stock',
-    icon: 'opacity',
-    value: '6 gal'
-  },
-  {
-    title: 'Milk',
-    icon: 'opacity',
-    value: '2 gal'
-  },
-  {
-    title: 'Oil',
-    icon: 'opacity',
-    value: '64 oz'
-  }
+
 
 ]
 
@@ -31,38 +17,167 @@ const categories = [
   {
     title: 'Meats',
     icon: 'opacity',
-    value: '4'
+    value: '4',
+    subitems: [
+      {
+        title: 'Chicken Stock',
+        icon: 'opacity',
+        value: '6 gal'
+      },
+      {
+        title: 'Milk',
+        icon: 'opacity',
+        value: '2 gal'
+      },
+      {
+        title: 'Oil',
+        icon: 'opacity',
+        value: '64 oz'
+      }
+    ]
   },
   {
     title: 'Grains',
     icon: 'flight-takeoff',
-    value: '7'
+    value: '7',
+    subitems: [
+      {
+        title: 'Chicken Stock',
+        icon: 'opacity',
+        value: '6 gal'
+      },
+      {
+        title: 'Milk',
+        icon: 'opacity',
+        value: '2 gal'
+      },
+      {
+        title: 'Oil',
+        icon: 'opacity',
+        value: '64 oz'
+      }
+    ]
   },
   {
     title: 'Fruits',
     icon: 'flight-takeoff',
-    value: '2'
+    value: '2',
+    subitems: [
+      {
+        title: 'Chicken Stock',
+        icon: 'opacity',
+        value: '6 gal'
+      },
+      {
+        title: 'Milk',
+        icon: 'opacity',
+        value: '2 gal'
+      },
+      {
+        title: 'Oil',
+        icon: 'opacity',
+        value: '64 oz'
+      }
+    ]
   },
   {
     title: 'Vegetables',
     icon: 'flight-takeoff',
-    value: '8'
+    value: '8',
+    subitems: [
+      {
+        title: 'Chicken Stock',
+        icon: 'opacity',
+        value: '6 gal'
+      },
+      {
+        title: 'Milk',
+        icon: 'opacity',
+        value: '2 gal'
+      },
+      {
+        title: 'Oil',
+        icon: 'opacity',
+        value: '64 oz'
+      }
+    ]
   },
   {
     title: 'Wet Ingredients',
     icon: 'flight-takeoff',
-    value: '15'
+    value: '15',
+    subitems: [
+      {
+        title: 'Chicken Stock',
+        icon: 'opacity',
+        value: '6 gal'
+      },
+      {
+        title: 'Milk',
+        icon: 'opacity',
+        value: '2 gal'
+      },
+      {
+        title: 'Oil',
+        icon: 'opacity',
+        value: '64 oz'
+      }
+    ]
   },
   {
     title: 'Dry Ingredients',
     icon: 'flight-takeoff',
-    value: '12'
+    value: '12',
+    subitems: [
+      {
+        title: 'Chicken Stock',
+        icon: 'opacity',
+        value: '6 gal'
+      },
+      {
+        title: 'Milk',
+        icon: 'opacity',
+        value: '2 gal'
+      },
+      {
+        title: 'Oil',
+        icon: 'opacity',
+        value: '64 oz'
+      }
+    ]
   },
 ]
 
-
-
 export class PantryPage extends Component {
+
+  _renderHeader(section){
+    return(
+      <View>
+        <Row
+          title={section.title}
+          icon={section.icon}
+          value={section.value} />
+      </View>
+    );
+  }
+
+
+
+  _renderContent(section) {
+  return (
+    <View>
+      {section.subitems.map( (item,i) =>{
+        return(
+          <Row
+            key = {i}
+            title={item.title}
+            icon={item.icon}
+            value={item.value} />
+        );
+      })}
+    </View>
+  );
+}
 
   constructor(props) {
     super(props);
@@ -85,7 +200,13 @@ export class PantryPage extends Component {
           name='add'
           raised = {true}
           color='#517fa4'/>
-        <ListView
+        <Accordion
+          sections={categories}
+          renderHeader={this._renderHeader}
+          renderContent={this._renderContent}
+        />
+
+        {/* <ListView
           style={styles.container}
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
@@ -94,7 +215,7 @@ export class PantryPage extends Component {
               icon={rowData.icon}
               value={rowData.value}
             /> }
-         />
+         /> */}
       </View>
     );
   }
