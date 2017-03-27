@@ -3,7 +3,8 @@ import { StyleSheet, Alert, Text, ListView, ScrollView, View, Navigator } from '
 import { Button, Icon, List, ListItem, FormLabel, FormInput, TouchableHighlight} from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
-import Row from './Row';
+import PantrySubItem from './../../components/pantrySubItem';
+import PantryHeader from './../../components/pantryHeader';
 
 var ReactNative = require('react-native');
 
@@ -153,7 +154,7 @@ export class PantryPage extends Component {
   _renderHeader(section){
     return(
       <View>
-        <Row
+        <PantryHeader
           title={section.title}
           icon={section.icon}
           value={section.value} />
@@ -168,7 +169,7 @@ export class PantryPage extends Component {
     <View>
       {section.subitems.map( (item,i) =>{
         return(
-          <Row
+          <PantrySubItem
             key = {i}
             title={item.title}
             icon={item.icon}
@@ -234,7 +235,6 @@ var styles = StyleSheet.create({
     bottom:15,
     right:15
   }
-
 });
 
 module.exports = PantryPage;
