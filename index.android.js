@@ -9,13 +9,14 @@ import {
 
 import Landing from './app/routes/landing';
 import RecipeFeed from './app/routes/recipe_feed';
+import Toolbar from './app/components/toolbar';
+
 
 export default class ReciPrep extends Component {
   render() {
     return (
       <View style={styles.mainView}>
-        <View style={styles.placeholder}/>
-        <RecipeFeed/>
+        <Landing/>
       </View>
     );
   }
