@@ -20,6 +20,9 @@ export class LogIn extends Component {
     .then( (response) => response.json())
     .then( (responseData) => {
       console.log('request succeeded with response', responseData);
+      if(responseData['auth_token']){
+        this.props.navigator.push({index:'mainView'});
+      }
     })
     .catch( (error) => {
       console.error(error);
@@ -27,7 +30,7 @@ export class LogIn extends Component {
   };
 
   _signupFunction = () => {
-    this.props.navigator.push({index: 'signup'})
+    this.props.navigator.push({index: 'signup'});
   };
 
   state: {
@@ -46,26 +49,31 @@ export class LogIn extends Component {
 
   render(){
     return(
-      <View style={styles.loginView}>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
+      <View style={{flex:1}}>
+        <View style={styles.loginHeader}>
+          <Text style={styles.headerText}>ReciPrep</Text>
         </View>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
+        <View style={styles.loginView}>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
+            <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
+          </View>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
+            <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
+          </View>
+          <Button
+            title='Login'
+            buttonStyle={styles.loginButton}
+            raised
+            underlayColor = 'blue'
+            onPress={this._loginFunction}/>
+          <Button
+            title='Signup'
+            buttonStyle={styles.signupButton}
+            raised
+            onPress={this._signupFunction}/>
         </View>
-        <Button
-          title='Login'
-          buttonStyle={styles.loginButton}
-          raised
-          underlayColor = 'blue'
-          onPress={this._loginFunction}/>
-        <Button
-          title='Signup'
-          buttonStyle={styles.signupButton}
-          raised
-          onPress={this._signupFunction}/>
       </View>
     );
   }
@@ -73,6 +81,16 @@ export class LogIn extends Component {
 
 //BackgroundColor 30415D,015249, 4ABDAC
 var styles = StyleSheet.create({
+  loginHeader:{
+    flex:1,
+    justifyContent: 'center'
+  },
+  headerText:{
+    color: '#DFDCE3',
+    textAlign: 'center',
+    fontWeight: '300',
+    fontSize: 58
+  },
   loginView:{
     flex:3,
     // justifyContent: 'center'

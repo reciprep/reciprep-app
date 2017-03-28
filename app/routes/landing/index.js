@@ -4,15 +4,19 @@ import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 import LogIn  from './login';
 import SignUp  from './signup';
+import MainView from '../mainView'
 
 export class Landing extends Component {
 
   _renderScene(route,navigator){
-    if (route.index=='login'){
+    if (route.index== 'login'){
       return <LogIn navigator={navigator}/>
     }
-    else if (route.index =='signup'){
+    else if (route.index == 'signup'){
       return <SignUp navigator={navigator}/>;
+    }
+    else if (route.index == 'mainView'){
+      return <MainView/>
     }
     else{
       //how to do error logging
@@ -26,9 +30,6 @@ export class Landing extends Component {
   render(){
     return(
       <View style={styles.page}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.headerText}>ReciPrep</Text>
-        </View>
         <Navigator
           style={{flex:3}}
           initialRoute={{index: 'login' }}
@@ -46,16 +47,6 @@ var styles = StyleSheet.create({
   page:{
     backgroundColor: '#4ABDAC',
     flex: 1,
-  },
-  loginHeader:{
-    flex:1,
-    justifyContent: 'center'
-  },
-  headerText:{
-    color: '#DFDCE3',
-    textAlign: 'center',
-    fontWeight: '300',
-    fontSize: 58
   }
 });
 

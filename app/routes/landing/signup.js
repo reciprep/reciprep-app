@@ -44,36 +44,51 @@ export class SignUp extends Component {
 
   render(){
     return(
-      <View style={styles.loginView}>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
+      <View style={{flex:1}}>
+        <View style={styles.loginHeader}>
+          <Text style={styles.headerText}>ReciPrep</Text>
         </View>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Email</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={(email) => this.setState({email})}/>
+        <View style={styles.loginView}>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
+            <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
+          </View>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Email</FormLabel>
+            <FormInput inputStyle={styles.inputText} onChangeText={(email) => this.setState({email})}/>
+          </View>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
+            <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
+          </View>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Confirm Password</FormLabel>
+            <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
+          </View>
+          <Button
+            title='Signup'
+            buttonStyle={styles.signupButton}
+            raised
+            onPress={this._signupFunction}/>
         </View>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
-        </View>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Confirm Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
-        </View>
-
-        <Button
-          title='Signup'
-          buttonStyle={styles.signupButton}
-          raised
-          onPress={this._signupFunction}/>
       </View>
+
     );
   }
 }
 
 //BackgroundColor 30415D,015249, 4ABDAC
 var styles = StyleSheet.create({
+  loginHeader:{
+    flex:1,
+    justifyContent: 'center'
+  },
+  headerText:{
+    color: '#DFDCE3',
+    textAlign: 'center',
+    fontWeight: '300',
+    fontSize: 58
+  },
   loginView:{
     flex:3,
     // justifyContent: 'center'

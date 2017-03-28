@@ -19,23 +19,17 @@ export class Toolbar extends Component {
 
   constructor() {
   	super();
-    this.state = {
-      recipeColor: '#ccff99',
-      pantryColor: '#009933'};
-  }
-
+}
   setButtonState(props) {
   	this.setState({isRecipe: props});
   };
 
   setPantryActive () {
-    this.setState({pantryColor: '#ccff99' });
-    this.setState({recipeColor: '#009933'});
+    this.props.navigator.push({index:'pantry'})
   };
 
   setRecipeActive () {
-    this.setState({pantryColor: '#009933' });
-    this.setState({recipeColor: '#ccff99'});
+    this.props.navigator.push({index:'recipeFeed'})
   };
 
   render(){
@@ -52,7 +46,7 @@ export class Toolbar extends Component {
         />
         <Button
           title='Recipes'
-          backgroundColor = {this.state.recipeColor}
+          backgroundColor = {this.props.recipeColor}
           buttonStyle={styles.recipeButton}
           raised
           color = 'black'
@@ -60,7 +54,7 @@ export class Toolbar extends Component {
         />
         <Button
           title='Pantry'
-          backgroundColor = {this.state.pantryColor}
+          backgroundColor = {this.props.pantryColor}
           buttonStyle={styles.pantryButton}
           raised
           color = 'black'

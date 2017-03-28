@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView} from 'r
 import { Button, SearchBar, Icon, Card } from 'react-native-elements';
 
 import RecipeCard from '../../components/recipeCard'
+import Toolbar from '../../components/toolbar'
 
 const recipes = [
   {
@@ -67,43 +68,43 @@ export class RecipeFeed extends Component{
 
   render(){
     return(
-      <View style={styles.container}>
-        <View style={styles.actionBar}>
-          <SearchBar
-            lightTheme
-            round
-            onChangeText={this._searchFunction}
-            containerStyle= {styles.searchContainer}
-            inputStyle={styles.searchInput}/>
-          <Button
-            title='filter'
-            buttonStyle={styles.filterButton}
-            raised
-            onPress={this._filterFunction} />
-          <Icon
-            name='add'
-            color='white'
-            size={36}
-            containerStyle={styles.iconContainer}/>
+        <View style={styles.container}>
+          <View style={styles.actionBar}>
+            <SearchBar
+              lightTheme
+              round
+              onChangeText={this._searchFunction}
+              containerStyle= {styles.searchContainer}
+              inputStyle={styles.searchInput}/>
+            <Button
+              title='filter'
+              buttonStyle={styles.filterButton}
+              raised
+              onPress={this._filterFunction} />
+            <Icon
+              name='add'
+              color='white'
+              size={36}
+              containerStyle={styles.iconContainer}/>
+          </View>
+          <View style={styles.feed}>
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={(rowData) =>
+                <RecipeCard
+                  title={rowData.title}
+                  imageSource={rowData.imageSource}
+                  description={rowData.description} />
+              }/>
+          </View>
         </View>
-        <View style={styles.feed}>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(rowData) =>
-              <RecipeCard
-                title={rowData.title}
-                imageSource={rowData.imageSource}
-                description={rowData.description} />
-            }/>
-        </View>
-      </View>
     );
   }
 }
 
 var styles = StyleSheet.create({
   container:{
-    flex:1
+    flex:8
   },
   actionBar:{
     backgroundColor: '#07A0C3',
