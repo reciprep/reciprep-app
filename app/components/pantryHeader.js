@@ -13,6 +13,7 @@ export class PantryHeader extends Component{
     return(
       <ListItem
         title={this.props.title}
+        leftIcon={{name: this.props.icon}}
         badge={{value: this.props.value}}
       />
     );

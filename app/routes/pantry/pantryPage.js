@@ -167,7 +167,21 @@ export class PantryPage extends Component {
   _renderContent(section) {
   return (
     <View>
-      {section.subitems.map( (item,i) =>{
+      <View style={styles.BufferFlex}></View>
+      <List style={styles.ListViewCustom}>
+      {
+        
+        section.subitems.map((item,i)=>(
+
+          <ListItem
+            key = {i}
+            title = {item.title}
+            value = {item.value}
+          />
+        ))
+      }
+      </List>
+    {/*}  {section.subitems.map( (item,i) =>{
         return(
           <PantrySubItem
             key = {i}
@@ -175,7 +189,7 @@ export class PantryPage extends Component {
             icon={item.icon}
             value={item.value} />
         );
-      })}
+      })}*/}
     </View>
   );
 }
@@ -184,8 +198,7 @@ export class PantryPage extends Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      categoryStates: [false,false,false,false,false,false],
-      dataSource: ds.cloneWithRows(categories),
+      dataSource: ds.cloneWithRows(categories)
     };
   }
 
@@ -222,6 +235,16 @@ var styles = StyleSheet.create({
   PantryView:{
     flex:1,
     // justifyContent: 'center'
+  },
+
+  BufferFlex:{
+    flex:1,
+    backgroundColor: '#4ABDAC'
+  },
+
+  ListViewCustom:{
+    flex:8,
+    flexDirection:'row'
   },
 
   separator: {

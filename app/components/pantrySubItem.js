@@ -42,10 +42,10 @@ var styles = StyleSheet.create({
     backgroundColor: '#4ABDAC'
   },
   subItem:{
-    flex: 4,
+    flex: 8,
     flexDirection: 'row',
-    backgroundColor: 'white',
-    elevation: 4,
+    backgroundColor: '#7ADBCD',
+    elevation: 30,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: 'grey',
