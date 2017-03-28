@@ -166,21 +166,23 @@ export class PantryPage extends Component {
 
   _renderContent(section) {
   return (
-    <View>
+    <View style={{flex:1,flexDirection:'row'}}>
       <View style={styles.BufferFlex}></View>
-      <List style={styles.ListViewCustom}>
-      {
-        
-        section.subitems.map((item,i)=>(
+      <View style={{flex:8}}>
+        <List style={styles.ListViewCustom}>
+        {
 
-          <ListItem
-            key = {i}
-            title = {item.title}
-            value = {item.value}
-          />
-        ))
-      }
-      </List>
+          section.subitems.map((item,i)=>(
+
+            <ListItem
+              key = {i}
+              title = {item.title}
+              value = {item.value}
+            />
+          ))
+        }
+        </List>
+      </View>
     {/*}  {section.subitems.map( (item,i) =>{
         return(
           <PantrySubItem
@@ -244,7 +246,7 @@ var styles = StyleSheet.create({
 
   ListViewCustom:{
     flex:8,
-    flexDirection:'row'
+    // flexDirection:'column'
   },
 
   separator: {
