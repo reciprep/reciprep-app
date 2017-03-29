@@ -23,6 +23,9 @@ export class LogIn extends Component {
       if(responseData['auth_token']){
         this.props.navigator.push({index:'mainView'});
       }
+      else {
+        Alert.alert(responseData["message"]);
+      }
     })
     .catch( (error) => {
       console.error(error);

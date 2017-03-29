@@ -18,8 +18,12 @@ export class SignUp extends Component {
         password: this.state.password,
       })
     })
+    .then( (response) => response.json())
     .then((json) => {
       console.log('request succeeded with response', json);
+      if(json['status']=='fail'){
+        Alert.alert(json['message']);
+      }
     })
     .catch( (error) => {
       console.log(error);
