@@ -1,41 +1,32 @@
 import React, { Component } from 'react';
-import {
-	AppRegistry,
-	StyleSheet,
-	TouchableHighlight,
-	Alert,
-	Text,
-	View,
-	Navigator
-} from 'react-native';
-import {
-	Button,
-	FormLabel,
-	FormInput
-} from 'react-native-elements';
-
+import { AppRegistry, StyleSheet, Text, View,	Navigator, AsyncStorage} from 'react-native';
+import { Button, FormLabel,	FormInput} from 'react-native-elements';
 
 export class Toolbar extends Component {
 
   constructor() {
   	super();
-    this.state = {
-      recipeColor: '#ccff99',
-      pantryColor: '#009933'};
-  }
-
+}
   setButtonState(props) {
   	this.setState({isRecipe: props});
   };
 
   setPantryActive () {
-    this.setState({pantryColor: '#ccff99' });
-    this.setState({recipeColor: '#009933'});
+    this.props.navigator.push({index:'pantry'})
   };
 
   setRecipeActive () {
-    this.setState({pantryColor: '#009933' });
-    this.setState({recipeColor: '#ccff99'});
+    this.props.navigator.push({index:'recipeFeed'})
+  };
+
+  async clearAuth ()  {
+    console.log("CLEAR")
+    const result = await AsyncStorage.getAllKeys((response) => console.log(response) );
+    console.log(result)
+    // const token = await AsyncStorage.getItem('auth_token',(response) => console.log(response) );
+    // console.log(result)
+    const result2 = await AsyncStorage.removeItem('auth_token', (response) => console.log(response) );
+    console.log(result2)
   };
 
   render(){
@@ -49,10 +40,11 @@ export class Toolbar extends Component {
                  color:'black',
                  size: 36}}
           raised
+          onPress={() => this.clearAuth()}
         />
         <Button
           title='Recipes'
-          backgroundColor = {this.state.recipeColor}
+          backgroundColor = {this.props.recipeColor}
           buttonStyle={styles.recipeButton}
           raised
           color = 'black'
@@ -60,7 +52,7 @@ export class Toolbar extends Component {
         />
         <Button
           title='Pantry'
-          backgroundColor = {this.state.pantryColor}
+          backgroundColor = {this.props.pantryColor}
           buttonStyle={styles.pantryButton}
           raised
           color = 'black'

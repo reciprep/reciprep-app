@@ -34,7 +34,7 @@ export class Pantry extends Component {
 var styles = StyleSheet.create({
   page:{
     backgroundColor: '#4ABDAC',
-    flex: 1,
+    flex: 8,
   }
 });
 module.exports = Pantry;
