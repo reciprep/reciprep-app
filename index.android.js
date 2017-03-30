@@ -7,8 +7,10 @@ import {
   View
 } from 'react-native';
 
-import Pantry from './app/routes/pantry';
+import Landing from './app/routes/landing';
+import RecipeFeed from './app/routes/recipe_feed';
 import Toolbar from './app/components/toolbar';
+import Pantry from './app/routes/pantry';
 
 export default class ReciPrep extends Component {
   render() {
@@ -26,6 +28,10 @@ export default class ReciPrep extends Component {
 var styles = StyleSheet.create({
   mainView:{
     flex: 8
+  },
+  placeholder:{
+    height:75,
+    backgroundColor: '#4ABDAC'
   }
 });
 
