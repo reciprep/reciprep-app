@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, Image, View, Navigator, AsyncStorage} from 'react-native';
 
 import Landing from './app/routes/landing';
-import RecipeFeed from './app/routes/recipeFeed';
-import Toolbar from './app/components/toolbar';
 import MainView from './app/routes/mainView'
 
 export default class ReciPrep extends Component {
@@ -43,7 +41,7 @@ export default class ReciPrep extends Component {
 
 var styles = StyleSheet.create({
   mainView:{
-    flex: 1
+    flex: 8
   },
   placeholder:{
     height:75,

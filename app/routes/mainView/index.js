@@ -3,8 +3,8 @@ import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 import RecipeFeed  from '../recipeFeed';
-import Temp from './temp';
-import Toolbar from '../../components/toolbar'
+import Toolbar from '../../components/toolbar';
+import Pantry from '../pantry';
 
 export class MainView extends Component {
 
@@ -27,7 +27,7 @@ export class MainView extends Component {
              navigator={navigator}
              recipeColor='#009933'
              pantryColor='#ccff99'/>
-           <Temp/>
+           <Pantry/>
          </View>
       );
     }
