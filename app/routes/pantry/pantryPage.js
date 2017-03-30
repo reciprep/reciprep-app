@@ -168,9 +168,9 @@ export class PantryPage extends React.Component {
   };
 
   _setModalVisible = (visible) => {
-    this.setState({modalVisible: visible});
+    // this.setState({modalVisible: visible});
   };
-  
+
   _renderContent = (section) =>{
     return (
       <View style={{flex:1,flexDirection:'row'}}>
@@ -178,9 +178,9 @@ export class PantryPage extends React.Component {
         <View style={{flex:8}}>
           <List containerStyle={{marginTop:-2, elevation:30}}>{
             section.subitems.map((item,i)=>(
-              <ListItem 
+              <ListItem
                 containerStyle={{backgroundColor:'#66d1c1'}}
-                onPress={() => {this._setModalVisible(true)}}
+                // onPress={() => {this._setModalVisible(true)}}
                 key = {i}
                 title = {item.title}
                 titleStyle =  {styles.titleStyleSubItem}
@@ -214,12 +214,12 @@ export class PantryPage extends React.Component {
           name='add'
           raised = {true}
           color='#517fa4'/>
-        <Modal
+        {/* <Modal
           visible={this.state.modalVisible}
           transparent={true}
           animationType={"fade"}
           onRequestClose={() => this._setModalVisible(false)}
-        >{/*
+        >{
           <View style={styles.container}>
             <View style={styles.innerContainer}>
               <Button
@@ -228,8 +228,8 @@ export class PantryPage extends React.Component {
                 Close
               </Button>
             </View>
-          </View>*/}
-        </Modal>
+          </View>}
+        </Modal> */}
         <Accordion
           sections={categories}
           renderHeader={this._renderHeader}
