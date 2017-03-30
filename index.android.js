@@ -10,13 +10,16 @@ import {
 import Landing from './app/routes/landing';
 import RecipeFeed from './app/routes/recipe_feed';
 import Toolbar from './app/components/toolbar';
-
+import Pantry from './app/routes/pantry';
 
 export default class ReciPrep extends Component {
   render() {
     return (
-      <View style={styles.mainView}>
-        <Landing/>
+      <View style={{flex: 1}}>
+        <Toolbar/>
+        <View style={styles.mainView}>
+          <Pantry/>
+        </View>
       </View>
     );
   }
@@ -24,7 +27,7 @@ export default class ReciPrep extends Component {
 
 var styles = StyleSheet.create({
   mainView:{
-    flex: 1
+    flex: 8
   },
   placeholder:{
     height:75,
