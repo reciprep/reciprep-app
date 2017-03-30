@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
+import { StyleSheet, Alert, Text, View, Navigator, AsyncStorage } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 
@@ -19,16 +19,20 @@ export class SignUp extends Component {
       })
     })
     .then( (response) => response.json())
-    .then((json) => {
+    .then( async (json) => {
       console.log('request succeeded with response', json);
       if(json['status']=='fail'){
         Alert.alert(json['message']);
+      }else{
+        const syncResponse = AsyncStorage.setItem('auth_token',json['auth_token']);
+        // console.log(json['auth_token']);
+        // console.log(syncResponse)
+        this.props.navigator.push({index:'mainView'});
       }
     })
     .catch( (error) => {
       console.log(error);
     });
-    this.props.navigator.pop();
   };
 
   state: {

@@ -1,19 +1,6 @@
 import React, { Component } from 'react';
-import {
-	AppRegistry,
-	StyleSheet,
-	TouchableHighlight,
-	Alert,
-	Text,
-	View,
-	Navigator
-} from 'react-native';
-import {
-	Button,
-	FormLabel,
-	FormInput
-} from 'react-native-elements';
-
+import { AppRegistry, StyleSheet, Text, View,	Navigator, AsyncStorage} from 'react-native';
+import { Button, FormLabel,	FormInput} from 'react-native-elements';
 
 export class Toolbar extends Component {
 
@@ -32,6 +19,16 @@ export class Toolbar extends Component {
     this.props.navigator.push({index:'recipeFeed'})
   };
 
+  async clearAuth ()  {
+    console.log("CLEAR")
+    const result = await AsyncStorage.getAllKeys((response) => console.log(response) );
+    console.log(result)
+    // const token = await AsyncStorage.getItem('auth_token',(response) => console.log(response) );
+    // console.log(result)
+    const result2 = await AsyncStorage.removeItem('auth_token', (response) => console.log(response) );
+    console.log(result2)
+  };
+
   render(){
 
     return(
@@ -43,6 +40,7 @@ export class Toolbar extends Component {
                  color:'black',
                  size: 36}}
           raised
+          onPress={() => this.clearAuth()}
         />
         <Button
           title='Recipes'

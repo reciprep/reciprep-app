@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
+import { StyleSheet, Alert, Text, View, Navigator, AsyncStorage } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 import LogIn  from './login';
@@ -27,7 +27,27 @@ export class Landing extends Component {
     return Navigator.SceneConfigs.FloatFromBottom
   }
 
+  autoLogin(navigator){
+    AsyncStorage.getItem('auth_token').then( (token) =>{
+      console.log("token")
+      console.log(token)
+      if(token !== null){
+        console.log("MAIN VIEW")
+        navigator.push({index:'mainView'})
+      }
+      else{
+        console.log("LANDING")
+      }
+    })
+  }
+
+  constructor(){
+    super();
+    this.autoLogin = this.autoLogin.bind(this);
+  }
+
   render(){
+    this.autoLogin(this.props.navigator)
     return(
       <View style={styles.page}>
         <Navigator

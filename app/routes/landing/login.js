@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
+import { StyleSheet, Alert, Text, View, Navigator, AsyncStorage } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 
 export class LogIn extends Component {
 
-  _loginFunction = ()=> {
+  _loginFunction = () => {
     fetch('http://10.0.2.2:8000/api/auth/login',{
       method: 'POST',
       headers: {
@@ -18,9 +18,12 @@ export class LogIn extends Component {
       })
     })
     .then( (response) => response.json())
-    .then( (responseData) => {
+    .then( async (responseData) => {
       console.log('request succeeded with response', responseData);
       if(responseData['auth_token']){
+        const syncResponse = await AsyncStorage.setItem('auth_token',responseData['auth_token']);
+        // console.log(responseData['auth_token']);
+        // console.log(syncResponse)
         this.props.navigator.push({index:'mainView'});
       }
       else {
