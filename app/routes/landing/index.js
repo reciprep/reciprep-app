@@ -15,11 +15,11 @@ export class Landing extends Component {
     else if (route.index == 'signup'){
       return <SignUp navigator={navigator}/>;
     }
-    else if (route.index == 'mainView'){
-      return <MainView/>
+    else if (route.index=='mainView'){
+      return <MainView navigator={navigator}/>;
     }
     else{
-      //how to do error logging
+      console.error("Un Specified Route " + route.index)
     }
   }
 
@@ -27,27 +27,11 @@ export class Landing extends Component {
     return Navigator.SceneConfigs.FloatFromBottom
   }
 
-  autoLogin(navigator){
-    AsyncStorage.getItem('auth_token').then( (token) =>{
-      console.log("token")
-      console.log(token)
-      if(token !== null){
-        console.log("MAIN VIEW")
-        navigator.push({index:'mainView'})
-      }
-      else{
-        console.log("LANDING")
-      }
-    })
-  }
-
   constructor(){
     super();
-    this.autoLogin = this.autoLogin.bind(this);
   }
 
   render(){
-    this.autoLogin(this.props.navigator)
     return(
       <View style={styles.page}>
         <Navigator

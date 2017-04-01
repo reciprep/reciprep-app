@@ -20,13 +20,7 @@ export class Toolbar extends Component {
   };
 
   async clearAuth ()  {
-    console.log("CLEAR")
-    const result = await AsyncStorage.getAllKeys((response) => console.log(response) );
-    console.log(result)
-    // const token = await AsyncStorage.getItem('auth_token',(response) => console.log(response) );
-    // console.log(result)
-    const result2 = await AsyncStorage.removeItem('auth_token', (response) => console.log(response) );
-    console.log(result2)
+    const result2 = await AsyncStorage.removeItem('auth_token');
   };
 
   render(){

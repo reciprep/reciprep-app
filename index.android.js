@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, Image, View, Navigator, AsyncStorage} from 'react-native';
 
 import Landing from './app/routes/landing';
-import MainView from './app/routes/mainView'
+import MainView from './app/routes/mainView';
+import Splash from './app/routes/splash';
 
 export default class ReciPrep extends Component {
 
   _renderScene(route,navigator){
+    if(route.index=="splash"){
+      return <Splash navigator={navigator}/>
+    }
     if(route.index=="landing"){
       return <Landing navigator={navigator}/>
     }
@@ -15,23 +19,17 @@ export default class ReciPrep extends Component {
     }
   }
 
-  state: {
-   initalRoute: string,
- };
+
 
  constructor(){
    super();
-   this.state = {
-     initalRoute: 'landing'
-   };
  }
 
   render() {
-    console.log("NEXT")
     return(
       <View style={styles.mainView}>
         <Navigator
-          initialRoute={{index: this.state.initalRoute }}
+          initialRoute={{index: 'splash' }}
           renderScene={this._renderScene}
           configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
         />

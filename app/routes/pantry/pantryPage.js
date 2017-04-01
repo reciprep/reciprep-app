@@ -214,22 +214,6 @@ export class PantryPage extends React.Component {
           name='add'
           raised = {true}
           color='#517fa4'/>
-        {/* <Modal
-          visible={this.state.modalVisible}
-          transparent={true}
-          animationType={"fade"}
-          onRequestClose={() => this._setModalVisible(false)}
-        >{
-          <View style={styles.container}>
-            <View style={styles.innerContainer}>
-              <Button
-                onPress={this._setModalVisible(false)}
-                style={styles.modalButton}>
-                Close
-              </Button>
-            </View>
-          </View>}
-        </Modal> */}
         <Accordion
           sections={categories}
           renderHeader={this._renderHeader}

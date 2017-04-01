@@ -22,8 +22,6 @@ export class LogIn extends Component {
       console.log('request succeeded with response', responseData);
       if(responseData['auth_token']){
         const syncResponse = await AsyncStorage.setItem('auth_token',responseData['auth_token']);
-        // console.log(responseData['auth_token']);
-        // console.log(syncResponse)
         this.props.navigator.push({index:'mainView'});
       }
       else {
