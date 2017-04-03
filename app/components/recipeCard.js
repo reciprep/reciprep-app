@@ -11,7 +11,7 @@ export class RecipeCard extends Component{
         flexDirection='row'
         containerStyle = {styles.recipeContainer} >
         <Image
-          source={this.props.imageSource}
+          source={{ uri: this.props.imageSource}}
           style={styles.recipeImage}>
         </Image>
         <View style={styles.recipeInfo}>
