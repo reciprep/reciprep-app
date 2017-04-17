@@ -169,6 +169,7 @@ export class PantryPage extends React.Component {
     );
   };
 
+<<<<<<< HEAD
   _setModalVisible = (visible,name, quantity, i, sectionID) => {
     this.setState({ingredient: name});
     this.setState({modalVisible: visible});
@@ -223,6 +224,12 @@ export class PantryPage extends React.Component {
   _Decrement = () => {
     this.setState({quantity: (parseInt(this.state.quantity, 10) - 1).toString()})
   };
+=======
+  _setModalVisible = (visible) => {
+    // this.setState({modalVisible: visible});
+  };
+
+>>>>>>> 0e243904dfd0fecf163514823e01ff8d9b9bf69e
   _renderContent = (section) =>{
     return (
       <View style={{flex:1,flexDirection:'row'}}>
@@ -230,9 +237,13 @@ export class PantryPage extends React.Component {
         <View style={{flex:8}}>
           <List containerStyle={{marginTop:-2, elevation:30}}>{
             section.subitems.map((item,i)=>(
-              <ListItem 
+              <ListItem
                 containerStyle={{backgroundColor:'#66d1c1'}}
+<<<<<<< HEAD
                 onPress={() => {this._setModalVisible(true,item.title,item.value,i, section.title)}}
+=======
+                // onPress={() => {this._setModalVisible(true)}}
+>>>>>>> 0e243904dfd0fecf163514823e01ff8d9b9bf69e
                 key = {i}
                 title = {item.title}
                 titleStyle =  {styles.titleStyleSubItem}
@@ -279,12 +290,17 @@ export class PantryPage extends React.Component {
           name='add'
           raised = {true}
           color='#517fa4'/>
-        <Modal
+        {/* <Modal
           visible={this.state.modalVisible}
           transparent={true}
           animationType={"fade"}
+<<<<<<< HEAD
           onRequestClose={() => this._closeModal()}
         >
+=======
+          onRequestClose={() => this._setModalVisible(false)}
+        >{
+>>>>>>> 0e243904dfd0fecf163514823e01ff8d9b9bf69e
           <View style={styles.container}>
             <View style={styles.innerContainer}>
               <Text style={{fontSize: 16, fontWeight: 'bold',}}>{this.state.ingredient}</Text>
@@ -325,6 +341,7 @@ export class PantryPage extends React.Component {
                   color='#517fa4'/>
               </View>
             </View>
+<<<<<<< HEAD
           </View>
         </Modal>
         <Modal
@@ -404,6 +421,10 @@ export class PantryPage extends React.Component {
             </View>
           </View>
         </Modal>
+=======
+          </View>}
+        </Modal> */}
+>>>>>>> 0e243904dfd0fecf163514823e01ff8d9b9bf69e
         <Accordion
           sections={categories}
           renderHeader={this._renderHeader}
