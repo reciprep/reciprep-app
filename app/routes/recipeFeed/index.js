@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage} from 'react-native';
-import { Button, SearchBar, Icon, Card } from 'react-native-elements';
+import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal} from 'react-native';
+import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 
 import RecipeCard from '../../components/recipeCard';
 import Toolbar from '../../components/toolbar';
 import RecipeLoad from './recipeLoad';
 import RecipeList from './recipeList';
+import RecipeAdd from './recipeAdd'
 
 export class RecipeFeed extends Component{
 
@@ -26,15 +27,24 @@ export class RecipeFeed extends Component{
     //todo implement filter
   }
 
+  _addRecipe = ()=>{
+    this.setState({modalVisible: true});
+  }
+
+  _hideModal = () =>{
+    this.setState({modalVisible: false})
+  }
+
   constructor(props){
     super(props);
+    this._hideModal = this._hideModal.bind(this)
     this.state = {
-      feedData: []
+      feedData: [],
+      modalVisible: false,
     };
   }
 
   render(){
-    // this._loadRecipes()
     return(
         <View style={styles.container}>
           <View style={styles.actionBar}>
@@ -49,12 +59,13 @@ export class RecipeFeed extends Component{
               buttonStyle={styles.filterButton}
               raised
               onPress={this._filterFunction} />
-            <Icon
-              name='add'
-              color='white'
-              size={36}
-              containerStyle={styles.iconContainer}/>
           </View>
+          <Modal
+            visible={this.state.modalVisible}
+            transparent={true}
+            onRequestClose={this._hideModal}>
+            <RecipeAdd closeModal={this._hideModal}/>
+          </Modal>
           <View style={styles.feed}>
             <Navigator style={{flex:1}}
               initialRoute={{index: 'recipeLoad' }}
@@ -62,6 +73,15 @@ export class RecipeFeed extends Component{
               configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
             />
           </View>
+          <Icon
+            containerStyle={styles.newItem}
+            onPress={this._addRecipe}
+            reverse
+            size = {30}
+            title='newItem'
+            name='add'
+            raised = {true}
+            color='#517fa4'/>
         </View>
     );
   }
@@ -78,7 +98,8 @@ var styles = StyleSheet.create({
     alignItems: 'center'
   },
   feed:{
-    flex: 8
+    flex: 8,
+    backgroundColor: '#4ABDAC'
   },
   searchContainer:{
     flex:2,
@@ -97,6 +118,11 @@ var styles = StyleSheet.create({
   },
   iconContainer:{
     flex:1,
+  },
+  newItem:{
+    position: 'absolute',
+    bottom:15,
+    right:15
   }
 });
 

@@ -8,9 +8,19 @@ export default class Splash extends Component {
 
 
 
-  autoLogin(navigator){
-    AsyncStorage.getItem('auth_token').then( (token) =>{
-      if(token !== null){
+  autoLogin = async (navigator) =>{
+    let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
+    fetch('http://10.0.2.2:8000/api/auth/status',{
+      method: 'GET',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json',
+        'Authorization': auth_token
+      }
+    })
+    .then( (response) => response.json())
+    .then( (responseData) => {
+      if(responseData['status'] == 'success'){
         navigator.push({index:'mainView'})
       }
       else{
