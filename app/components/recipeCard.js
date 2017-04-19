@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 
 import RecipeFeedStarRating from './recipeFeedStarRating';
@@ -7,20 +7,22 @@ import RecipeFeedStarRating from './recipeFeedStarRating';
 export class RecipeCard extends Component{
   render(){
     return(
-      <Card
-        flexDirection='row'
-        containerStyle = {styles.recipeContainer} >
-        <Image
-          source={{ uri: this.props.imageSource}}
-          style={styles.recipeImage}>
-        </Image>
-        <View style={styles.recipeInfo}>
-          <Text style={styles.recipeTitle}>{this.props.title}</Text>
-          <Text style={styles.recipeDescription} numberOfLines={3}> {this.props.description}</Text>
-          <RecipeFeedStarRating/>
-        </View>
+      <TouchableOpacity onPress={()=>{this.props.showDetail(this.props.recipeID)}}>
+        <Card
+          flexDirection='row'
+          containerStyle = {styles.recipeContainer} >
+          <Image
+            source={{ uri: this.props.imageSource}}
+            style={styles.recipeImage}>
+          </Image>
+          <View style={styles.recipeInfo}>
+            <Text style={styles.recipeTitle}>{this.props.title}</Text>
+            <Text style={styles.recipeDescription} numberOfLines={3}> {this.props.description}</Text>
+            <RecipeFeedStarRating rating={3.5} disabled={true}/>
+          </View>
 
-      </Card>
+        </Card>
+      </TouchableOpacity>
     );
   }
 }

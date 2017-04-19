@@ -23,7 +23,8 @@ class RecipeFeedStarRating extends Component {
         maxStars={5}
         starSize={20}
         starColor='gold'
-        rating={this.state.starCount}
+        disabled={this.props.disabled}
+        rating={this.props.rating}
         selectedStar={(rating) => this.onStarRatingPress(rating)}
       />
     );

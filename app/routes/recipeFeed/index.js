@@ -6,7 +6,8 @@ import RecipeCard from '../../components/recipeCard';
 import Toolbar from '../../components/toolbar';
 import RecipeLoad from './recipeLoad';
 import RecipeList from './recipeList';
-import RecipeAdd from './recipeAdd'
+import RecipeAdd from './recipeAdd';
+import RecipeDetail from '../recipeDetail';
 
 export class RecipeFeed extends Component{
 
@@ -28,19 +29,20 @@ export class RecipeFeed extends Component{
   }
 
   _addRecipe = ()=>{
-    this.setState({modalVisible: true});
+    this.setState({addRecipe: true});
   }
 
   _hideModal = () =>{
-    this.setState({modalVisible: false})
+    this.setState({addRecipe: false});
   }
+
 
   constructor(props){
     super(props);
     this._hideModal = this._hideModal.bind(this)
     this.state = {
       feedData: [],
-      modalVisible: false,
+      addRecipe: false,
     };
   }
 
@@ -60,8 +62,8 @@ export class RecipeFeed extends Component{
               raised
               onPress={this._filterFunction} />
           </View>
-          <Modal
-            visible={this.state.modalVisible}
+          <Modal //Modal for Adding Recipe
+            visible={this.state.addRecipe}
             transparent={true}
             onRequestClose={this._hideModal}>
             <RecipeAdd closeModal={this._hideModal}/>
