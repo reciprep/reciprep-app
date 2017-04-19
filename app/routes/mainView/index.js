@@ -16,7 +16,7 @@ export class MainView extends Component {
              navigator={navigator}
              recipeColor='#ccff99'
              pantryColor='#009933'/>
-           <RecipeFeed/>
+           <RecipeFeed navigator={navigator}/>
          </View>
       );
     }

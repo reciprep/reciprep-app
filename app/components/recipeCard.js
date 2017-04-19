@@ -12,13 +12,15 @@ export class RecipeCard extends Component{
           flexDirection='row'
           containerStyle = {styles.recipeContainer} >
           <Image
-            source={{ uri: this.props.imageSource}}
+            source={{ uri: this.props.imageSource ? this.props.imageSource : "http://www.novelupdates.com/img/noimagefound.jpg"}}
             style={styles.recipeImage}>
           </Image>
           <View style={styles.recipeInfo}>
             <Text style={styles.recipeTitle}>{this.props.title}</Text>
             <Text style={styles.recipeDescription} numberOfLines={3}> {this.props.description}</Text>
-            <RecipeFeedStarRating rating={3.5} disabled={true}/>
+            <View style={styles.ratingContainer}>
+              <RecipeFeedStarRating rating={this.props.rating} disabled={true}/>
+            </View>
           </View>
 
         </Card>
@@ -46,10 +48,17 @@ var styles = StyleSheet.create({
   recipeTitle:{
     color: 'black',
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    flex: 1
   },
   recipeDescription:{
-
+    flex: 3,
+    marginRight: 3
+  },
+  ratingContainer:{
+    flex: 1,
+    marginBottom: 10,
+    marginRight: 10
   }
 })
 

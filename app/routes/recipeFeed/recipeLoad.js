@@ -19,7 +19,7 @@ export class RecipeLoad extends Component{
     .then( (responseData) => {
       if(responseData['status'] == 'success'){
         navigator.push({index:'recipeList',
-                        feedData: responseData['results']});
+                        feedData: responseData['data']['recipes']});
         console.log('request succeeded with responseData');
       }
       else{

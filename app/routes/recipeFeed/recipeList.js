@@ -39,11 +39,12 @@ export class RecipeList extends Component{
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
             <RecipeCard
-              title={rowData.title}
+              title={rowData.name}
               imageSource={rowData.imageSource}
               description={rowData.description}
               showDetail={this.showDetail}
-              recipeID={rowData.recipeID}/>
+              rating={rowData.rating}
+              recipeID={rowData.recipe_id}/>
           }/>
       </View>
     );

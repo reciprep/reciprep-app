@@ -43,6 +43,8 @@ export class RecipeFeed extends Component{
     this.state = {
       feedData: [],
       addRecipe: false,
+      searchCriteria: "",
+      navigator: "",
     };
   }
 
@@ -53,7 +55,7 @@ export class RecipeFeed extends Component{
             <SearchBar
               lightTheme
               round
-              onChangeText={this._searchFunction}
+              onChangeText={(input) => this.setState({searchCriteria:input})}
               containerStyle= {styles.searchContainer}
               inputStyle={styles.searchInput}/>
             <Button
