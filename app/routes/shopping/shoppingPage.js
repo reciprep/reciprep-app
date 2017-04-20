@@ -309,6 +309,11 @@ export class ShoppingPage extends React.Component {
     //todo implement filter
   }
 
+  _deleteAll = () =>{
+    categories = [];
+    recipes = [];
+  }
+
   deleteRecipe = (recipeName) =>{
     var count;
     for(count = 0; count < recipes.length; count++){
@@ -550,6 +555,16 @@ export class ShoppingPage extends React.Component {
           raised = {true}
           zIndex = {1000}
           color='#517fa4'/>
+          <Icon
+          containerStyle={styles.deleteItem}
+          onPress={() => this._deleteAll()}
+          reverse
+          size = {30}
+          title='delete'
+          name='add'
+          raised = {true}
+          zIndex = {1000}
+          color='#517fa4'/>
       </View>
     );
   }
@@ -659,6 +674,11 @@ var styles = StyleSheet.create({
     position: 'absolute',
     bottom:15,
     right:15
+  }
+  deleteItem:{
+    position: 'absolute',
+    bottom:15,
+    left:15
   }
 });
 
