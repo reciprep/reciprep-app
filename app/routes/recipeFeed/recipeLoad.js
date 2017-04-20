@@ -7,7 +7,7 @@ export class RecipeLoad extends Component{
 
   _loadRecipes = async (navigator) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
-    fetch('http://10.0.2.2:8000/api/recipe/search',{
+    fetch('http://10.0.2.2:8000/api/recipe/search?filter=true',{
       method: 'GET',
       headers: {
         'Accept':'application/json',
