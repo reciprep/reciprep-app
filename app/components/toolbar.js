@@ -107,9 +107,9 @@ var styles = StyleSheet.create({
     width: 97,
     borderWidth: 2,
     borderLeftWidth: 1,
-    borderRightWidth: 0,
+    borderRightWidth: 1,
   },
-  pantryButton:{
+  shoppingButton:{
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
