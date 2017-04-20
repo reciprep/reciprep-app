@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal} from 'react-native';
-import { Button, SearchBar, Icon, Card } from 'react-native-elements';
+import { Button, SearchBar, Icon, Card, CheckBox } from 'react-native-elements';
 
 import RecipeCard from '../../components/recipeCard';
 import RecipeDetail from '../recipeDetail';
@@ -21,7 +21,10 @@ export class RecipeList extends Component{
   _searchFunction = async (navigator)=>{
     let updatedSearchCriteria = this.state.searchCriteria.replace(' ','+');
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
-    let fetchMethod = 'http://10.0.2.2:8000/api/recipe/search?terms='+ updatedSearchCriteria + '&filter=true';
+    let fetchMethod = 'http://10.0.2.2:8000/api/recipe/search?terms='+ updatedSearchCriteria;
+    if (!this.state.checked){
+      fetchMethod = fetchMethod + '&filter=true';
+    }
     console.log(fetchMethod)
     fetch(fetchMethod,{
       method: 'GET',
@@ -57,12 +60,25 @@ export class RecipeList extends Component{
     this.setState({addRecipe: false});
   }
 
+  toggleCheck = () =>{
+    console.log("HERE")
+
+    if (this.state.checked){
+      this.setState({checked: false})
+    }
+    else{
+      this.setState({checked: true})
+    }
+
+  }
+
 
   constructor(props){
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this._hideModal = this._hideModal.bind(this)
     this._searchFunction = this._searchFunction.bind(this)
+    this.toggleCheck = this.toggleCheck.bind(this)
 
     this.state = {
       dataSource: ds.cloneWithRows(this.props.feedData),
@@ -71,6 +87,7 @@ export class RecipeList extends Component{
       modalRecipeID: '0',
       searchCriteria: "",
       navigator: "",
+      checked: false,
     };
   }
 
@@ -84,6 +101,13 @@ export class RecipeList extends Component{
             onChangeText={(input) => this.setState({searchCriteria:input})}
             containerStyle= {styles.searchContainer}
             inputStyle={styles.searchInput}/>
+          <CheckBox
+            containerStyle={styles.checkBox}
+            textStyle={{color: 'white'}}
+            title='disable filter'
+            onIconPress={this.toggleCheck}
+            onPress={this.toggleCheck}
+            checked={this.state.checked}/>
           <Button
             title='search'
             buttonStyle={styles.searchButton}
@@ -138,12 +162,18 @@ var styles = StyleSheet.create({
     alignItems: 'center'
   },
   searchContainer:{
-    flex:2,
+    flex:3,
     backgroundColor: '#07A0C3',
     borderBottomColor: '#07A0C3',
     borderTopColor: '#07A0C3',
   },
   searchInput:{
+  },
+  checkBox:{
+    flex: 2,
+    borderColor: '#07A0C3',
+    backgroundColor: '#07A0C3',
+
   },
   searchButton:{
     flex:1,
