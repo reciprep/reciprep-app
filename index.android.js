@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native';
 
+import Shopping from './app/routes/shopping';
 import Pantry from './app/routes/pantry';
 import Toolbar from './app/components/toolbar';
 
@@ -18,7 +19,7 @@ export default class ReciPrep extends Component {
         <View style={styles.mainView}>
           <Pantry/>
         </View>
-      </View>
+      </View> 
     );
   }
 }

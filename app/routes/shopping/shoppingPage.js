@@ -1,20 +1,66 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, ListView, ScrollView, View, Navigator, Modal, TextInput, Picker} from 'react-native';
-import { Button, Icon, List, ListItem, FormLabel, FormInput, TouchableHighlight} from 'react-native-elements';
-import Accordion from 'react-native-collapsible/Accordion';
+import { StyleSheet, Alert, ListView, ScrollView, View, Navigator, Modal, TextInput, Picker, Text, AsyncStorage} from 'react-native';
+import { Button, Icon, List, Card, SearchBar, ListItem, FormLabel, FormInput, TouchableHighlight} from 'react-native-elements';
 
+import Accordion from 'react-native-collapsible/Accordion';
 import PantrySubItem from './../../components/pantrySubItem';
 import PantryHeader from './../../components/pantryHeader';
+import RecipeCard from '../../components/recipeCard';
 
 var ReactNative = require('react-native');
 
-const wet_Ingredients = [
+let rec1Obj ={
+  title: 'Chicken Parmigana',
+  imageSource: require('../../images/chicken-parmigiani.jpg'),
+  description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+}
 
+const recipes2 = [
 
 ]
 
-
-
+const recipes = [
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  }
+]
 
 const categories = [
   {
@@ -137,7 +183,7 @@ const categories = [
         title: 'Chicken Stock',
         icon: 'opacity',
         value: '6'
-      },
+      }, 
       {
         title: 'Milk',
         icon: 'opacity',
@@ -153,10 +199,11 @@ const categories = [
   },
 ]
 
+
+
 const Item = Picker.Item;
 
-export class PantryPage extends React.Component {
-
+export class ShoppingPage extends React.Component {
 
   _renderHeader = (section) =>{
     return(
@@ -191,10 +238,13 @@ export class PantryPage extends React.Component {
       }
   };
 
+  populateData = async () =>{
+    await AsyncStorage.setItem('rec1', rec1Obj);
+  }
+
   _closeModal2 = () =>{
     this.setState({modalVisible2: false});
   }
-
 
   //the below modal will save the data
   _closeModal3 = () =>{
@@ -228,9 +278,12 @@ export class PantryPage extends React.Component {
 
   _Increment = () => {
     this.setState({text: (parseInt(this.state.text, 10) + 1).toString()})
-
   };
   _Decrement = () => {
+    if(parseInt(this.state.text,10)<2){
+      this.setState({text: '0'})
+      return;
+    }
     this.setState({text: (parseInt(this.state.text, 10) - 1).toString()})
   };
 
@@ -238,8 +291,27 @@ export class PantryPage extends React.Component {
     this.setState({quantity: (parseInt(this.state.quantity, 10) + 1).toString()})
   };
   _Decrement2 = () => {
+     if(parseInt(this.state.quantity,10)<2){
+      this.setState({quantity: '0'})
+      return;
+    }
     this.setState({quantity: (parseInt(this.state.quantity, 10) - 1).toString()})
   };
+
+  _searchFunction = ()=>{
+    //todo implement search
+  }
+
+  _filterFunction = ()=>{
+    //todo implement filter
+  }
+
+  _loadRecipes = async () =>{
+    var count;
+    for(count = 0; count < 4; count++){
+      recipes2[count] = await AsyncStorage.getItem('rec1');
+    }
+  }
 
   _renderContent = (section) =>{
     return (
@@ -266,9 +338,12 @@ export class PantryPage extends React.Component {
 
   constructor(props) {
     super(props);
+
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds2 = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(categories),
+      dataSource2: ds2.cloneWithRows(recipes),
       modalVisible:false,
       modalVisible2:false,
       value: '0',
@@ -285,18 +360,10 @@ export class PantryPage extends React.Component {
   };
 
   render(){
+    this.populateData();
+    this._loadRecipes();
     return(
-
       <View style={styles.PantryView}>
-        <Icon
-          containerStyle={styles.newItem}
-          onPress={() => this._setModalVisible2(true)}
-          reverse
-          size = {30}
-          title='newItem'
-          name='add'
-          raised = {true}
-          color='#517fa4'/>
         <Modal
           visible={this.state.modalVisible}
           transparent={true}
@@ -437,11 +504,33 @@ export class PantryPage extends React.Component {
             </View>
           </View>
         </Modal>
-        <Accordion
-          sections={categories}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-        />
+        <ScrollView>
+          <Accordion
+            sections={categories}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+          />
+          <View>
+            <ListView
+              dataSource={this.state.dataSource2}
+              renderRow={(rowData) =>
+                <RecipeCard
+                  title={rowData.title}
+                  imageSource={rowData.imageSource}
+                  description={rowData.description} />
+              }/>
+            </View>
+        </ScrollView>
+        <Icon
+          containerStyle={styles.newItem}
+          onPress={() => this._setModalVisible2(true)}
+          reverse
+          size = {30}
+          title='newItem'
+          name='add'
+          raised = {true}
+          zIndex = {1000}
+          color='#517fa4'/>
       </View>
     );
   }
@@ -459,6 +548,34 @@ export class PantryPage extends React.Component {
 var styles = StyleSheet.create({
   Header:{
     flex:3,
+  },
+
+  actionBar:{
+    backgroundColor: '#07A0C3',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  feed:{
+    flex: 8
+  },
+  searchContainer:{
+    flex:2,
+    backgroundColor: '#07A0C3',
+    borderBottomColor: '#07A0C3',
+    borderTopColor: '#07A0C3',
+  },
+  searchInput:{
+  },
+  filterButton:{
+    flex:1,
+    height: 30,
+    borderRadius: 8,
+    elevation: 2,
+    backgroundColor: '#4ABDAC',
+  },
+  iconContainer:{
+    flex:1,
   },
 
   modalButton: {
@@ -526,4 +643,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = PantryPage;
+module.exports = ShoppingPage;
