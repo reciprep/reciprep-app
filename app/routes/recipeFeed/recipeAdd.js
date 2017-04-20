@@ -1,17 +1,53 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal} from 'react-native';
+import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal, Alert} from 'react-native';
 import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 
 
 class RecipeAdd extends Component{
 
 
-  makeNewRecipe = () =>{
-    //do nothing for now
-    console.log(this.state.newRecipeName)
-    console.log(this.state.newRecipeDescription)
-    console.log(this.state.recipeSteps)
-    console.log(this.state.ingredientList)
+  makeNewRecipe = async () =>{
+    let finalIngredientList=[]
+    for(i=0;i<this.state.ingredientList.length;i++){
+      subItem={
+        'name': this.state.ingredientList[i],
+        'type': "VOLUME",
+        'value': 1.0,
+        'category': "Dry"
+      }
+      finalIngredientList.push(subItem)
+    }
+    console.log(finalIngredientList)
+    let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
+    fetch('http://10.0.2.2:8000/api/recipe',{
+      method: 'POST',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json',
+        'Authorization': auth_token
+      },
+      body: JSON.stringify({
+        'name': this.state.newRecipeName,
+        'description': this.state.newRecipeDescription,
+        'ingredients': finalIngredientList,
+        'steps':this.state.recipeSteps,
+        'rating': 3
+      })
+    })
+    .then( (response) => response.json())
+    .then( (responseData) => {
+      if(responseData['status'] == 'success'){
+        Alert.alert("Recipe Created")
+        console.log('Create requrest succeeded with response', responseData);
+      }
+      else{
+        Alert.alert("Recipe Creation Failed")
+        console.log('Create request failed with response', responseData);
+      }
+      })
+      .catch( (error) => {
+        console.error(error);
+      });
   }
 
   addStepField = () =>{
