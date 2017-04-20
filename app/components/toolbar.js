@@ -19,6 +19,10 @@ export class Toolbar extends Component {
     this.props.navigator.push({index:'recipeFeed'})
   };
 
+  setShoppingActive () {
+    this.props.navigator.push({index:'shoppingFeed'})
+  };
+
   async clearAuth ()  {
     const result2 = await AsyncStorage.removeItem('auth_token');
   };
@@ -52,6 +56,14 @@ export class Toolbar extends Component {
           color = 'black'
           onPress={() => this.setPantryActive()}
         />
+        <Button
+          title='Shopping'
+          backgroundColor = {this.props.ShoppingColor}
+          buttonStyle={styles.ShoppingButton}
+          raised
+          color = 'black'
+          onPress={() => this.setShoppingActive()}
+        />
       </View>
     )
   }
@@ -82,7 +94,7 @@ var styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 0,
     marginBottom: 0,
-    width: 145,
+    width: 97,
     borderWidth: 2,
     borderRightWidth: 1,
     borderLeftWidth: 1,
@@ -92,7 +104,17 @@ var styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 0,
     marginBottom: 0,
-    width: 145,
+    width: 97,
+    borderWidth: 2,
+    borderLeftWidth: 1,
+    borderRightWidth: 0,
+  },
+  pantryButton:{
+    marginTop: 0,
+    marginRight: 0,
+    marginLeft: 0,
+    marginBottom: 0,
+    width: 97,
     borderWidth: 2,
     borderLeftWidth: 1,
     borderRightWidth: 0,
