@@ -79,7 +79,7 @@ const dataFinal = {
 
 export class ShoppingLoad extends React.Component {
 
-  _loadDetails = (navigator) =>{
+  _loadDetails = async (navigator) =>{
     //var count;
     //var count2;
     var temp = await AsyncStorag.egetItem('rec');

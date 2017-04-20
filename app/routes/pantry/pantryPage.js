@@ -92,12 +92,40 @@ export class PantryPage extends React.Component {
     this.setState({modalVisible2: visible});
   };
 
-  _closeModal = () =>{
+  _closeModal = async () =>{
       this.setState({modalVisible: false});
       var count;
+      var jsonObject = {ingredient_name: this.state.ingredient, 'value': parseFloat(this.state.text)}
+      var jsonObjectArr = [];
+      jsonObjectArr.push(jsonObject);
       for(count=0;count<6; count++){
         if(this.state.category == this.props.data[count].title){
           this.props.data[count].subitems[this.state.index].value=this.state.text;
+          let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
+          fetch('http://10.0.2.2:8000/api/user/pantry',{
+            method: 'PATCH',
+            headers:{
+              'Accept':'application/json',
+              'Content-Type':'application/json',
+              'Authorization': auth_token
+            },
+            body: JSON.stringify({
+              'ingredients': jsonObjectArr
+            })
+          })
+          .then( (response) => response.json())
+          .then( (responseData) => {
+            if(responseData['status'] == 'success'){
+              Alert.alert("Ingredient Quantity Chaged")
+              console.log('Create request succeeded', responseData);
+            }
+            else{
+              Alert.alert("Ingredient change faileD")
+              console.log('Request failed', responseData);
+            }
+          }).catch( (error) =>{
+            console.error(error);
+          });
         }
       }
   };
@@ -207,7 +235,7 @@ export class PantryPage extends React.Component {
   };
 
   render(){
-    transferData();
+    this.transferData();
     return(
 
       <View style={styles.PantryView}>
