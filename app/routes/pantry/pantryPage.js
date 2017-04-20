@@ -13,10 +13,56 @@ const wet_Ingredients = [
 
 ]
 
-
-
-
-
+const categories =  [
+    {
+    title: 'MEATS',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'GRAINS',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'FRUITS',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'VEGETABLES',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'WET',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'DRY',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'DAIRY',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'MISC',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  ]
 
 const Item = Picker.Item;
 
@@ -56,6 +102,17 @@ export class PantryPage extends React.Component {
       }
   };
 
+  transferData = ()=>{
+    var count;
+    var count2;
+    //transfers ingredients from props
+    for(count = 0; count < 8; count ++){
+      for(count2 = 0; count2 < this.props.data[count].subitems.length; count2++){
+        categories[count].subitems.push({title:this.props.data[count].subitems[count2].title,type:this.props.data[count].subitems[count2].type,value:this.props.data[count].subitems[count2].type});
+      }
+    }
+  }
+
   _closeModal2 = () =>{
     this.setState({modalVisible2: false});
   }
@@ -66,7 +123,7 @@ export class PantryPage extends React.Component {
     this.setState({modalVisible2: false});
     var count;
     var count2;
-    for(count=0;count<6; count++){
+    for(count=0;count<8; count++){
       //below means we matched our category to an ingredient
       if(this.state.category2 == this.props.data[count].title){
         this.props.data[count].subitems.push({title:this.state.ingredientType ,icon:'Oil',value:this.state.quantity});
@@ -133,7 +190,7 @@ export class PantryPage extends React.Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.data),
+      dataSource: ds.cloneWithRows(categories),
       modalVisible:false,
       modalVisible2:false,
       value: '0',
@@ -145,11 +202,12 @@ export class PantryPage extends React.Component {
       ingredientType: 'Apples',
       quantity: '1',
       measurement2: 'oz.',
-      category2: 'Meats',
+      category2: 'MEATS',
     };
   };
 
   render(){
+    transferData();
     return(
 
       <View style={styles.PantryView}>
@@ -241,12 +299,14 @@ export class PantryPage extends React.Component {
                   selectedValue={this.state.category2}
                   mode="dropdown"
                   onValueChange={(text3) => this.setState({category2: text3})}>
-                  <Item label="Meats" value="Meats"/>
-                  <Item label="Grains" value="Grains"/>
-                  <Item label="Fruits" value="Fruits"/>
-                  <Item label="Vegetables" value="Vegetables"/>
-                  <Item label="Wet Ingredients" value="Wet Ingredients"/>
-                  <Item label="Dry Ingredients" value="Dry Ingredients"/>
+                  <Item label="Meats" value="MEATS"/>
+                  <Item label="Grains" value="GRAINS"/>
+                  <Item label="Fruits" value="FRUITS"/>
+                  <Item label="Vegetables" value="VEGETABLES"/>
+                  <Item label="Wet" value="WET"/>
+                  <Item label="Dry" value="DRY"/>
+                  <Item label="Dairy" value="DAIRY"/>
+                  <Item label="Misc" value="MISC"/>
                 </Picker>
               </View>
               <View style={{flex: 1, flexDirection: 'row', marginBottom:35}}>
