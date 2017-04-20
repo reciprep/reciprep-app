@@ -1,63 +1,63 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, ListView, ScrollView, View, Navigator, Modal, TextInput, Picker, AsyncStorage} from 'react-native';
-import { Button, Icon, List, ListItem, FormLabel, FormInput, TouchableHighlight} from 'react-native-elements';
-import Accordion from 'react-native-collapsible/Accordion';
+import { StyleSheet, Alert, ListView, ScrollView, View, Navigator, Modal, TextInput, Picker, Text, AsyncStorage} from 'react-native';
+import { Button, Icon, List, Card, SearchBar, ListItem, FormLabel, FormInput, TouchableHighlight} from 'react-native-elements';
 
+import Accordion from 'react-native-collapsible/Accordion';
 import PantrySubItem from './../../components/pantrySubItem';
 import PantryHeader from './../../components/pantryHeader';
+import RecipeCard from '../../components/recipeCard';
 
 var ReactNative = require('react-native');
 
-const wet_Ingredients = [
-
+const recipes = [
 
 ]
 
 const categories =  [
     {
-    title: 'MEATS',
+    title: 'Meats',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
   },
   {
-    title: 'GRAINS',
+    title: 'Grains',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
   },
   {
-    title: 'FRUITS',
+    title: 'Fruits',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
   },
   {
-    title: 'VEGETABLES',
+    title: 'Vegetables',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
   },
   {
-    title: 'WET',
+    title: 'Wet',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
   },
   {
-    title: 'DRY',
+    title: 'Dry',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
   },
   {
-    title: 'DAIRY',
+    title: 'Dairy',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
   },
   {
-    title: 'MISC',
+    title: 'Misc',
     icon: 'flight-takeoff',
     subitems: [],
     value: '0'
@@ -66,8 +66,7 @@ const categories =  [
 
 const Item = Picker.Item;
 
-export class PantryPage extends React.Component {
-
+export class ShoppingPage extends React.Component {
 
   _renderHeader = (section) =>{
     return(
@@ -92,98 +91,34 @@ export class PantryPage extends React.Component {
     this.setState({modalVisible2: visible});
   };
 
-  _closeModal = async () =>{
+  _closeModal = () =>{
       this.setState({modalVisible: false});
       var count;
-      var jsonObject = {ingredient_name: this.state.ingredient, 'value': parseFloat(this.state.text)}
-      var jsonObjectArr = [];
-      jsonObjectArr.push(jsonObject);
       for(count=0;count<6; count++){
-        if(this.state.category == this.props.data[count].title){
-          this.props.data[count].subitems[this.state.index].value=this.state.text;
-          let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
-          fetch('http://10.0.2.2:8000/api/user/pantry',{
-            method: 'PATCH',
-            headers:{
-              'Accept':'application/json',
-              'Content-Type':'application/json',
-              'Authorization': auth_token
-            },
-            body: JSON.stringify({
-              'ingredients': jsonObjectArr
-            })
-          })
-          .then( (response) => response.json())
-          .then( (responseData) => {
-            if(responseData['status'] == 'success'){
-              Alert.alert("Ingredient Quantity Changed")
-              console.log('Create request succeeded', responseData);
-            }
-            else{
-              Alert.alert("Ingredient change failed")
-              console.log('Request failed', responseData);
-            }
-          }).catch( (error) =>{
-            console.error(error);
-          });
+        if(this.state.category == categories[count].title){
+          categories[count].subitems[this.state.index].value=this.state.text;
         }
       }
   };
 
-  transferData = ()=>{
-    var count;
-    var count2;
-    //transfers ingredients from props
-    for(count = 0; count < 8; count ++){
-      for(count2 = 0; count2 < this.props.data[count].subitems.length; count2++){
-        categories[count].subitems.push({title:this.props.data[count].subitems[count2].title,type:this.props.data[count].subitems[count2].type,value:this.props.data[count].subitems[count2].type});
-      }
-    }
+  populateData = async () =>{
+    await AsyncStorage.setItem('rec1', rec1Obj);
   }
 
   _closeModal2 = () =>{
     this.setState({modalVisible2: false});
   }
 
-
   //the below modal will save the data
-  _closeModal3 = async () =>{
+  _closeModal3 = () =>{
     this.setState({modalVisible2: false});
     var count;
     var count2;
-    var jsonObject = {ingredient_name: this.state.ingredientType, 'value': parseFloat(this.state.quantity)}
-    var jsonObjectArr = [];
-
-    for(count=0;count<8; count++){
+    for(count=0;count<6; count++){
       //below means we matched our category to an ingredient
-      if(this.state.category2 == this.props.data[count].title){
-        this.props.data[count].subitems.push({title:this.state.ingredientType ,icon:'Oil',value:this.state.quantity});
-        this.setState({dataSource: this.state.dataSource.cloneWithRows(this.props.data)});
-        let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
-        fetch('http://10.0.2.2:8000/api/user/pantry',{
-          method: 'PATCH',
-          headers:{
-            'Accept':'application/json',
-            'Content-Type':'application/json',
-            'Authorization': auth_token
-          },
-          body: JSON.stringify({
-            'ingredients': jsonObjectArr
-          })
-        })
-        .then( (response) => response.json())
-        .then( (responseData) => {
-          if(responseData['status'] == 'success'){
-            Alert.alert("Ingredient Quantity Changed")
-            console.log('Create request succeeded', responseData);
-          }
-          else{
-            Alert.alert("Ingredient change failed")
-            console.log('Request failed', responseData);
-          }
-        }).catch( (error) =>{
-          console.error(error);
-        });
+      if(this.state.category2 == categories[count].title){
+        categories[count].subitems.push({title:this.state.ingredientType ,type:'Volume',value:this.state.quantity});
+        this.setState({dataSource: this.state.dataSource.cloneWithRows(categories)});
       }
     }
   };
@@ -206,9 +141,12 @@ export class PantryPage extends React.Component {
 
   _Increment = () => {
     this.setState({text: (parseInt(this.state.text, 10) + 1).toString()})
-
   };
   _Decrement = () => {
+    if(parseInt(this.state.text,10)<2){
+      this.setState({text: '0'})
+      return;
+    }
     this.setState({text: (parseInt(this.state.text, 10) - 1).toString()})
   };
 
@@ -216,8 +154,36 @@ export class PantryPage extends React.Component {
     this.setState({quantity: (parseInt(this.state.quantity, 10) + 1).toString()})
   };
   _Decrement2 = () => {
+     if(parseInt(this.state.quantity,10)<2){
+      this.setState({quantity: '0'})
+      return;
+    }
     this.setState({quantity: (parseInt(this.state.quantity, 10) - 1).toString()})
   };
+
+  _searchFunction = ()=>{
+    //todo implement search
+  }
+
+  _filterFunction = ()=>{
+    //todo implement filter
+  }
+
+  transferData = ()=>{
+    var count;
+    var count2;
+    //transfers ingredients from props
+    for(count = 0; count < 8; count ++){
+      for(count2 = 0; count2 < this.props.data.categories[count].subitems.length; count2++){
+        categories[count].subitems.push({title:this.props.data.categories[count].subitems[count2].title,type:this.props.data.categories[count].subitems[count2].type,value:this.props.data.categories[count].subitems[count2].type});
+      }
+    }
+    //transfers recipies from props
+    var count3;
+    for(count3 = 0; count3 < this.props.data.recipies.length; count3++){
+      recipes.push({title:this.props.data.recipies[count3].title,imageSource:this.props.data.recipies[count3].imageSource,description:this.props.data.recipies[count3].description})
+    }
+  }
 
   _renderContent = (section) =>{
     return (
@@ -228,7 +194,7 @@ export class PantryPage extends React.Component {
             section.subitems.map((item,i)=>(
               <ListItem
                 containerStyle={{backgroundColor:'#66d1c1'}}
-                onPress={() => {this._setModalVisible(true,item.title,item.value.toString(),i, section.title)}}
+                onPress={() => {this._setModalVisible(true,item.title,item.value,i, section.title)}}
                 key = {i}
                 title = {item.title}
                 titleStyle =  {styles.titleStyleSubItem}
@@ -245,8 +211,10 @@ export class PantryPage extends React.Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds2 = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(categories),
+      dataSource2: ds2.cloneWithRows(recipes),
       modalVisible:false,
       modalVisible2:false,
       value: '0',
@@ -258,24 +226,15 @@ export class PantryPage extends React.Component {
       ingredientType: 'Apples',
       quantity: '1',
       measurement2: 'oz.',
-      category2: 'MEATS',
+      category2: 'Meats',
+      loading: true,
     };
   };
 
   render(){
     this.transferData();
     return(
-
       <View style={styles.PantryView}>
-        <Icon
-          containerStyle={styles.newItem}
-          onPress={() => this._setModalVisible2(true)}
-          reverse
-          size = {30}
-          title='newItem'
-          name='add'
-          raised = {true}
-          color='#517fa4'/>
         <Modal
           visible={this.state.modalVisible}
           transparent={true}
@@ -349,81 +308,31 @@ export class PantryPage extends React.Component {
             <View style={styles.innerContainer}>
               <Text style={{fontSize: 16, fontWeight: 'bold',}}>Add Ingredient to Pantry</Text>
               <View style={{flex: 1, flexDirection: 'row', marginBottom:35}}>
+                <Text style={{fontSize: 14, fontWeight: 'bold',}}>Category:</Text>
+                <Picker
+                  style={styles.pickerText}
+                  selectedValue={this.state.category2}
+                  mode="dropdown"
+                  onValueChange={(text3) => this.setState({category2: text3})}>
+                  <Item label="Meats" value="Meats"/>
+                  <Item label="Grains" value="Grains"/>
+                  <Item label="Fruits" value="Fruits"/>
+                  <Item label="Vegetables" value="Vegetables"/>
+                  <Item label="Wet Ingredients" value="Wet Ingredients"/>
+                  <Item label="Dry Ingredients" value="Dry Ingredients"/>
+                </Picker>
+              </View>
+              <View style={{flex: 1, flexDirection: 'row', marginBottom:35}}>
                 <Text style={{fontSize: 14, fontWeight: 'bold',}}>Ingredient:</Text>
                 <Picker
                   style={styles.pickerText}
                   selectedValue={this.state.ingredientType}
                   mode="dropdown"
                   onValueChange={(text2) => this.setState({ingredientType: text2})}>
-                  <Item label = "garbanzo beans" value="garbanzo beans"/>
-                  <Item label = "artichoke hearts" value="artichoke hearts"/>
-                  <Item label = "garlic" value="garlic"/>
-                  <Item label = "tahini" value="tahini"/>
-                  <Item label = "extra virgin olive oil" value="extra virgin olive oil"/>
-                  <Item label = "water" value="water"/>
-                  <Item label = "kosher salt" value="kosher salt"/>
-                  <Item label = "eggs" value="eggs"/>
-                  <Item label = "mayonnaise" value="mayonnaise"/>
-                  <Item label = "Dijon mustard" value="Dijon mustard"/>
-                  <Item label = "white wine vinegar" value="white wine vinegar"/>
-                  <Item label = "chipotle chile powder" value="chipotle chile powder"/>
-                  <Item label = "garlic powder" value="garlic powder"/>
-                  <Item label = "thick-cut bacon" value="thick-cut bacon"/>
-                  <Item label = "crean cheese" value="crean cheese"/>
-                  <Item label = "brown suger" value="brown suger"/>
-                  <Item label = "pure maple syrup" value="pure maple syrup"/>
-                  <Item label = "canned pumkin" value="canned pumkin"/>
-                  <Item label = "pumkin pie spice" value="pumkin pie spice"/>
-                  <Item label = "cinnamon" value="cinnamon"/>
-                  <Item label = "vanilla extract" value="vanilla extract"/>
-                  <Item label = "whole wheat flour" value="whole wheat flour"/>
-                  <Item label = "oat bran" value="oat bran"/>
-                  <Item label = "pecan meal" value="pecan meal"/>
-                  <Item label = "baking powder" value="baking powder"/>
-                  <Item label = "baking soda" value="baking soda"/>
-                  <Item label = "salt" value="salt"/>
-                  <Item label = "butter" value="butter"/>
-                  <Item label = "honey" value="honey"/>
-                  <Item label = "egg whites" value="egg whites"/>
-                  <Item label = "banana" value="banana"/>
-                  <Item label = "buttermilk" value="buttermilk"/>
-                  <Item label = "pomegranate juice" value="pomegranate juice"/>
-                  <Item label = "balsamic vinegar" value="balsamic vinegar"/>
-                  <Item label = "vegetable oil" value="vegetable oil"/>
-                  <Item label = "baby spinach leaves" value="baby spinach leaves"/>
-                  <Item label = "apple" value="apple"/>
-                  <Item label = "pomegranate seeds" value="pomegranate seeds"/>
-                  <Item label = "toasted walnuts" value="toasted walnuts"/>
-                  <Item label = "cooked crumbled bacon" value="cooked crumbled bacon"/>
-                  <Item label = "blue cheese" value="blue cheese"/>
-                  <Item label = "pomegranate vinaigrette" value="pomegranate vinaigrette"/>
-                  <Item label = "onion" value="onion"/>
-                  <Item label = "carrots" value="carrots"/>
-                  <Item label = "hot peppers" value="hot peppers"/>
-                  <Item label = "garlic cloves" value="garlic cloves"/>
-                  <Item label = "potatoes" value="potatoes"/>
-                  <Item label = "chicken stock" value="chicken stock"/>
-                  <Item label = "spinach" value="spinach"/>
-                  <Item label = "parsley" value="parsley"/>
-                  <Item label = "thyme" value="thyme"/>
-                  <Item label = "cream" value="cream"/>
-                  <Item label = "cream cheese" value="cream cheese"/>
-                  <Item label = "blue cheese" value="blue cheese"/>
-                  <Item label = "onion powder" value="onion powder"/>
-                  <Item label = "ground beef" value="ground beef"/>
-                  <Item label = "salmon fillet" value="salmon fillet"/>
-                  <Item label = "capers" value="capers"/>
-                  <Item label = "salt" value="salt"/>
-                  <Item label = "black pepper" value="black pepper"/>
-                  <Item label = "lemon" value="lemon"/>
-                  <Item label = "linguine pasta" value="linguine pasta"/>
-                  <Item label = "shallots" value="shallots"/>
-                  <Item label = "shrimp" value="shrimp"/>
-                  <Item label = "dry white wine" value="dry white wine"/>
-                  <Item label = "wheat germ" value="wheat germ"/>
-                  <Item label = "blueberries" value="blueberries"/>
-                  <Item label = "olive oil" value="olive oil"/>
-
+                  <Item label="Apples" value="Apples"/>
+                  <Item label="Bannanas" value="Bannanas"/>
+                  <Item label="Oranges" value="Oranges"/>
+                  <Item label="Grapes" value="Grapes"/>
                 </Picker>
               </View>
               <View style={{flex: 1, flexDirection: 'row', marginBottom:35}}>
@@ -466,11 +375,33 @@ export class PantryPage extends React.Component {
             </View>
           </View>
         </Modal>
-        <Accordion
-          sections={this.props.data}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-        />
+        <ScrollView>
+          <Accordion
+            sections={categories}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+          />
+          <View>
+            <ListView
+              dataSource={this.state.dataSource2}
+              renderRow={(rowData) =>
+                <RecipeCard
+                  title={rowData.title}
+                  imageSource={rowData.imageSource}
+                  description={rowData.description} />
+              }/>
+            </View>
+        </ScrollView>
+        <Icon
+          containerStyle={styles.newItem}
+          onPress={() => this._setModalVisible2(true)}
+          reverse
+          size = {30}
+          title='newItem'
+          name='add'
+          raised = {true}
+          zIndex = {1000}
+          color='#517fa4'/>
       </View>
     );
   }
@@ -488,6 +419,34 @@ export class PantryPage extends React.Component {
 var styles = StyleSheet.create({
   Header:{
     flex:3,
+  },
+
+  actionBar:{
+    backgroundColor: '#07A0C3',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  feed:{
+    flex: 8
+  },
+  searchContainer:{
+    flex:2,
+    backgroundColor: '#07A0C3',
+    borderBottomColor: '#07A0C3',
+    borderTopColor: '#07A0C3',
+  },
+  searchInput:{
+  },
+  filterButton:{
+    flex:1,
+    height: 30,
+    borderRadius: 8,
+    elevation: 2,
+    backgroundColor: '#4ABDAC',
+  },
+  iconContainer:{
+    flex:1,
   },
 
   modalButton: {
@@ -529,7 +488,7 @@ var styles = StyleSheet.create({
 
   picker: {
     width: 100,
-    //flex:1
+    //flex:1 
     //flexDirection:'column'
   },
 
@@ -555,4 +514,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = PantryPage;
+module.exports = ShoppingPage;
