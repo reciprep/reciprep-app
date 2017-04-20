@@ -35,6 +35,7 @@ export class MainView extends Component {
       );
     }
     else if (route.index =='shopping'){
+      console.log("IN HERE")
       return(
          <View style={styles.page}>
            <Toolbar

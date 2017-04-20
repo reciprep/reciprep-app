@@ -20,7 +20,7 @@ export class Toolbar extends Component {
   };
 
   setShoppingActive () {
-    this.props.navigator.push({index:'shoppingFeed'})
+    this.props.navigator.push({index:'shopping'})
   };
 
   async clearAuth ()  {

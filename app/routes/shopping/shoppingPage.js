@@ -534,8 +534,6 @@ export class ShoppingPage extends React.Component {
               renderRow={(rowData) =>
                 <RecipeCard
                   title={rowData.title}
-                  showDetail={deleteRecipe(title)}
-                  imageSource={rowData.imageSource}
                   description={rowData.description} />
               }/>
             </View>

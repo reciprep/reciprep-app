@@ -18,8 +18,8 @@ export class Shopping extends Component {
       return <ShoppingPage navigator={navigator} data={route.data}/>
     }
   }
- 
-  
+
+
   _configureScene(route,routeStack){
     return Navigator.SceneConfigs.FloatFromBottom
   }
@@ -44,7 +44,7 @@ export class Shopping extends Component {
 var styles = StyleSheet.create({
   page:{
     backgroundColor: '#4ABDAC',
-    flex: 1,
+    flex: 8,
   }
 });
 module.exports = Shopping;
