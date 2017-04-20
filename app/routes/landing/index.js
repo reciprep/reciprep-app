@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
+import { StyleSheet, Alert, Text, View, Navigator, AsyncStorage } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 import LogIn  from './login';
 import SignUp  from './signup';
+import MainView from '../mainView'
 
 export class Landing extends Component {
 
   _renderScene(route,navigator){
-    if (route.index=='login'){
+    if (route.index== 'login'){
       return <LogIn navigator={navigator}/>
     }
-    else if (route.index =='signup'){
+    else if (route.index == 'signup'){
       return <SignUp navigator={navigator}/>;
     }
+    else if (route.index=='mainView'){
+      return <MainView navigator={navigator}/>;
+    }
     else{
-      //how to do error logging
+      console.error("Un Specified Route " + route.index)
     }
   }
 
@@ -23,12 +27,13 @@ export class Landing extends Component {
     return Navigator.SceneConfigs.FloatFromBottom
   }
 
+  constructor(){
+    super();
+  }
+
   render(){
     return(
       <View style={styles.page}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.headerText}>ReciPrep</Text>
-        </View>
         <Navigator
           style={{flex:3}}
           initialRoute={{index: 'login' }}
@@ -46,16 +51,6 @@ var styles = StyleSheet.create({
   page:{
     backgroundColor: '#4ABDAC',
     flex: 1,
-  },
-  loginHeader:{
-    flex:1,
-    justifyContent: 'center'
-  },
-  headerText:{
-    color: '#DFDCE3',
-    textAlign: 'center',
-    fontWeight: '300',
-    fontSize: 58
   }
 });
 

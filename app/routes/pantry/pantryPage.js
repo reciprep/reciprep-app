@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, ListView, ScrollView, View, Navigator, Modal, TextInput, Picker} from 'react-native';
+import { StyleSheet, Alert, Text, ListView, ScrollView, View, Navigator, Modal, TextInput, Picker, AsyncStorage} from 'react-native';
 import { Button, Icon, List, ListItem, FormLabel, FormInput, TouchableHighlight} from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
@@ -16,142 +16,7 @@ const wet_Ingredients = [
 
 
 
-const categories = [
-  {
-    title: 'Meats',
-    icon: 'opacity',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
-  },
-  {
-    title: 'Grains',
-    icon: 'flight-takeoff',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
-  },
-  {
-    title: 'Fruits',
-    icon: 'flight-takeoff',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
-  },
-  {
-    title: 'Vegetables',
-    icon: 'flight-takeoff',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
-  },
-  {
-    title: 'Wet Ingredients',
-    icon: 'flight-takeoff',
-    
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
-  },
-  {
-    title: 'Dry Ingredients',
-    icon: 'flight-takeoff',
-    
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
-  },
-]
+
 
 const Item = Picker.Item;
 
@@ -185,8 +50,8 @@ export class PantryPage extends React.Component {
       this.setState({modalVisible: false});
       var count;
       for(count=0;count<6; count++){
-        if(this.state.category == categories[count].title){
-          categories[count].subitems[this.state.index].value=this.state.text;
+        if(this.state.category == this.props.data[count].title){
+          this.props.data[count].subitems[this.state.index].value=this.state.text;
         }
       }
   };
@@ -203,9 +68,9 @@ export class PantryPage extends React.Component {
     var count2;
     for(count=0;count<6; count++){
       //below means we matched our category to an ingredient
-      if(this.state.category2 == categories[count].title){
-        categories[count].subitems.push({title:this.state.ingredientType ,icon:'Oil',value:this.state.quantity});
-        this.setState({dataSource: this.state.dataSource.cloneWithRows(categories)});
+      if(this.state.category2 == this.props.data[count].title){
+        this.props.data[count].subitems.push({title:this.state.ingredientType ,icon:'Oil',value:this.state.quantity});
+        this.setState({dataSource: this.state.dataSource.cloneWithRows(this.props.data)});
       }
     }
   };
@@ -250,7 +115,7 @@ export class PantryPage extends React.Component {
             section.subitems.map((item,i)=>(
               <ListItem
                 containerStyle={{backgroundColor:'#66d1c1'}}
-                onPress={() => {this._setModalVisible(true,item.title,item.value,i, section.title)}}
+                onPress={() => {this._setModalVisible(true,item.title,item.value.toString(),i, section.title)}}
                 key = {i}
                 title = {item.title}
                 titleStyle =  {styles.titleStyleSubItem}
@@ -268,7 +133,7 @@ export class PantryPage extends React.Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(categories),
+      dataSource: ds.cloneWithRows(this.props.data),
       modalVisible:false,
       modalVisible2:false,
       value: '0',
@@ -438,7 +303,7 @@ export class PantryPage extends React.Component {
           </View>
         </Modal>
         <Accordion
-          sections={categories}
+          sections={this.props.data}
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}
         />
@@ -500,7 +365,7 @@ var styles = StyleSheet.create({
 
   picker: {
     width: 100,
-    //flex:1 
+    //flex:1
     //flexDirection:'column'
   },
 
