@@ -30,7 +30,7 @@ export class Shopping extends Component {
       <View style={styles.page}>
         <Navigator
           style={{flex:3}}
-          initialRoute={{index: 'shoppingLoad'}}
+          initialRoute={{index: 'shoppingPage'}}
           renderScene={this._renderScene}
           configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
         />
