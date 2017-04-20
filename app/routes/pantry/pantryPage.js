@@ -108,7 +108,7 @@ const categories = [
   {
     title: 'Wet Ingredients',
     icon: 'flight-takeoff',
-    
+
     subitems: [
       {
         title: 'Chicken Stock',
@@ -131,7 +131,7 @@ const categories = [
   {
     title: 'Dry Ingredients',
     icon: 'flight-takeoff',
-    
+
     subitems: [
       {
         title: 'Chicken Stock',
@@ -500,7 +500,7 @@ var styles = StyleSheet.create({
 
   picker: {
     width: 100,
-    //flex:1 
+    //flex:1
     //flexDirection:'column'
   },
 

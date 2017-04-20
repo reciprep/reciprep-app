@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
+import { StyleSheet, Alert, Text, View, Navigator, AsyncStorage } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 
@@ -18,13 +18,21 @@ export class SignUp extends Component {
         password: this.state.password,
       })
     })
-    .then((json) => {
+    .then( (response) => response.json())
+    .then( async (json) => {
       console.log('request succeeded with response', json);
+      if(json['status']=='fail'){
+        Alert.alert(json['message']);
+      }else{
+        const syncResponse = AsyncStorage.setItem('auth_token',json['auth_token']);
+        // console.log(json['auth_token']);
+        // console.log(syncResponse)
+        this.props.navigator.push({index:'mainView'});
+      }
     })
     .catch( (error) => {
       console.log(error);
     });
-    this.props.navigator.pop();
   };
 
   state: {
@@ -44,36 +52,51 @@ export class SignUp extends Component {
 
   render(){
     return(
-      <View style={styles.loginView}>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
+      <View style={{flex:1}}>
+        <View style={styles.loginHeader}>
+          <Text style={styles.headerText}>ReciPrep</Text>
         </View>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Email</FormLabel>
-          <FormInput inputStyle={styles.inputText} onChangeText={(email) => this.setState({email})}/>
+        <View style={styles.loginView}>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Username</FormLabel>
+            <FormInput inputStyle={styles.inputText} onChangeText={(username) => this.setState({username})}/>
+          </View>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Email</FormLabel>
+            <FormInput inputStyle={styles.inputText} onChangeText={(email) => this.setState({email})}/>
+          </View>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
+            <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
+          </View>
+          <View style={styles.inputGroup}>
+            <FormLabel labelStyle={styles.inputLabel}>Confirm Password</FormLabel>
+            <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
+          </View>
+          <Button
+            title='Signup'
+            buttonStyle={styles.signupButton}
+            raised
+            onPress={this._signupFunction}/>
         </View>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
-        </View>
-        <View style={styles.inputGroup}>
-          <FormLabel labelStyle={styles.inputLabel}>Confirm Password</FormLabel>
-          <FormInput inputStyle={styles.inputText} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
-        </View>
-
-        <Button
-          title='Signup'
-          buttonStyle={styles.signupButton}
-          raised
-          onPress={this._signupFunction}/>
       </View>
+
     );
   }
 }
 
 //BackgroundColor 30415D,015249, 4ABDAC
 var styles = StyleSheet.create({
+  loginHeader:{
+    flex:1,
+    justifyContent: 'center'
+  },
+  headerText:{
+    color: '#DFDCE3',
+    textAlign: 'center',
+    fontWeight: '300',
+    fontSize: 58
+  },
   loginView:{
     flex:3,
     // justifyContent: 'center'
