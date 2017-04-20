@@ -45,7 +45,7 @@ export class MainView extends Component {
       <View style={styles.page}>
         <Navigator
           // style={{flex:8}}
-          initialRoute={{index: 'recipeFeed' }}
+          initialRoute={{index: 'pantry' }}
           renderScene={this._renderScene}
           configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
         />

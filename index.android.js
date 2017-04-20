@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, Image, View, Navigator, AsyncStorage} from 'react-native';
 
 import Landing from './app/routes/landing';
-import RecipeFeed from './app/routes/recipe_feed';
+import RecipeFeed from './app/routes/recipeFeed';
 import Shopping from './app/routes/shopping';
 import Toolbar from './app/components/toolbar';
 import Pantry from './app/routes/pantry';
