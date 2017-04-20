@@ -91,19 +91,21 @@ export class ShoppingPage extends React.Component {
     this.setState({modalVisible2: visible});
   };
 
-  _closeModal = () =>{
+  _closeModal = async () =>{
       this.setState({modalVisible: false});
       var count;
-      for(count=0;count<6; count++){
+      for(count=0;count<8; count++){
         if(this.state.category == categories[count].title){
           categories[count].subitems[this.state.index].value=this.state.text;
+          var temp = await AsyncStorage.getItem('cat');
+          temp = JSON.parse(temp);
+          temp[count].subitems[this.state.index].value=this.state.text;
+          temp = JSON.stringify(temp);
+          await AsyncStorage.setItem('cat', temp);
         }
       }
   };
 
-  populateData = async () =>{
-    await AsyncStorage.setItem('rec1', rec1Obj);
-  }
 
   _closeModal2 = () =>{
     this.setState({modalVisible2: false});
@@ -114,28 +116,22 @@ export class ShoppingPage extends React.Component {
     this.setState({modalVisible2: false});
     var count;
     var count2;
-    for(count=0;count<6; count++){
+    for(count=0;count<8; count++){
       //below means we matched our category to an ingredient
       if(this.state.category2 == categories[count].title){
         categories[count].subitems.push({title:this.state.ingredientType ,type:'Volume',value:this.state.quantity});
         this.setState({dataSource: this.state.dataSource.cloneWithRows(categories)});
+        var temp = await AsyncStorage.getItem('cat');
+        temp = JSON.parse(temp);
+        temp[count].subitems.push({title:this.state.ingredientType, type:'Volume',value:this.state.quantity})
+        temp = JSON.stringify(temp);
+        await AsyncStorage.setItem('cat',temp);
       }
     }
   };
 
   _Remove =() => {
-    {/*var count;
-    var count2;
-    for(count=0; count<6; count++){
-      if(this.state.category == categories[count].title){
-        for(count2=0; count < categories[count].subitems.length; count2++){
-          if(categories[count].subitems[count2].title == this.state.ingredient){
-            categories[count].subitems[count2].value = '0';
-            categories[count].subitems.splice(count2,1);
-          }
-        }
-      }
-    }*/}
+    this.state.text = '0';
     this._closeModal();
   }
 
@@ -167,6 +163,17 @@ export class ShoppingPage extends React.Component {
 
   _filterFunction = ()=>{
     //todo implement filter
+  }
+
+  deleteRecipe = (recipeName) =>{
+    var count;
+    temp = await AsyncStorage.getItem('rec');
+    temp = JSON.parse(temp);
+    for(count = 0; count < temp.length; count++){
+      temp.splice(count,1);
+    }
+    temp = JSON.stringify(temp);
+    await AsyncStorage.setItem('rec',temp);
   }
 
   transferData = ()=>{
@@ -387,6 +394,7 @@ export class ShoppingPage extends React.Component {
               renderRow={(rowData) =>
                 <RecipeCard
                   title={rowData.title}
+                  showDetail={deleteRecipe(title)}
                   imageSource={rowData.imageSource}
                   description={rowData.description} />
               }/>
