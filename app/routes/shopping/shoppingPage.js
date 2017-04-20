@@ -10,56 +10,210 @@ import RecipeCard from '../../components/recipeCard';
 var ReactNative = require('react-native');
 
 const recipes = [
-
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  },
+  {
+    title: 'Chicken Parmigana',
+    imageSource: require('../../images/chicken-parmigiani.jpg'),
+    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
+  }
 ]
 
 const categories =  [
     {
     title: 'Meats',
     icon: 'flight-takeoff',
-    subitems: [],
-    value: '0'
+    subitems: [
+      {
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },
+
+      ],
+    value: '3'
   },
   {
     title: 'Grains',
     icon: 'flight-takeoff',
-    subitems: [],
+    subitems: [{
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },],
     value: '0'
   },
   {
     title: 'Fruits',
     icon: 'flight-takeoff',
-    subitems: [],
+    subitems: [{
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },],
     value: '0'
   },
   {
     title: 'Vegetables',
     icon: 'flight-takeoff',
-    subitems: [],
+    subitems: [{
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },],
     value: '0'
   },
   {
     title: 'Wet',
     icon: 'flight-takeoff',
-    subitems: [],
+    subitems: [{
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },],
     value: '0'
   },
   {
     title: 'Dry',
     icon: 'flight-takeoff',
-    subitems: [],
+    subitems: [{
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },],
     value: '0'
   },
   {
     title: 'Dairy',
     icon: 'flight-takeoff',
-    subitems: [],
+    subitems: [{
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },],
     value: '0'
   },
   {
     title: 'Misc',
     icon: 'flight-takeoff',
-    subitems: [],
+    subitems: [{
+        title: 'Apples',
+        icon: 'add',
+        value: '3'
+      },
+      {
+        title: 'Bannanas',
+        icon: 'add',
+        value: '8'
+      },
+      {
+        title: 'Pickles',
+        icon: 'add',
+        value: '2'
+      },],
     value: '0'
   },
   ]
@@ -91,17 +245,12 @@ export class ShoppingPage extends React.Component {
     this.setState({modalVisible2: visible});
   };
 
-  _closeModal = async () =>{
+  _closeModal = () =>{
       this.setState({modalVisible: false});
       var count;
       for(count=0;count<8; count++){
         if(this.state.category == categories[count].title){
           categories[count].subitems[this.state.index].value=this.state.text;
-          var temp = await AsyncStorage.getItem('cat');
-          temp = JSON.parse(temp);
-          temp[count].subitems[this.state.index].value=this.state.text;
-          temp = JSON.stringify(temp);
-          await AsyncStorage.setItem('cat', temp);
         }
       }
   };
@@ -121,11 +270,6 @@ export class ShoppingPage extends React.Component {
       if(this.state.category2 == categories[count].title){
         categories[count].subitems.push({title:this.state.ingredientType ,type:'Volume',value:this.state.quantity});
         this.setState({dataSource: this.state.dataSource.cloneWithRows(categories)});
-        var temp = await AsyncStorage.getItem('cat');
-        temp = JSON.parse(temp);
-        temp[count].subitems.push({title:this.state.ingredientType, type:'Volume',value:this.state.quantity})
-        temp = JSON.stringify(temp);
-        await AsyncStorage.setItem('cat',temp);
       }
     }
   };
@@ -167,13 +311,9 @@ export class ShoppingPage extends React.Component {
 
   deleteRecipe = (recipeName) =>{
     var count;
-    temp = await AsyncStorage.getItem('rec');
-    temp = JSON.parse(temp);
-    for(count = 0; count < temp.length; count++){
-      temp.splice(count,1);
+    for(count = 0; count < recipes.length; count++){
+      recipes.splice(count,1);
     }
-    temp = JSON.stringify(temp);
-    await AsyncStorage.setItem('rec',temp);
   }
 
   transferData = ()=>{
@@ -239,7 +379,7 @@ export class ShoppingPage extends React.Component {
   };
 
   render(){
-    this.transferData();
+    //this.transferData();
     return(
       <View style={styles.PantryView}>
         <Modal
