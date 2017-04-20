@@ -17,7 +17,7 @@ export default class ReciPrep extends Component {
       <View style={{flex: 1}}>
         <Toolbar/>
         <View style={styles.mainView}>
-          <Pantry/>
+          <Shopping/>
         </View>
       </View> 
     );

@@ -9,197 +9,60 @@ import RecipeCard from '../../components/recipeCard';
 
 var ReactNative = require('react-native');
 
-let rec1Obj ={
-  title: 'Chicken Parmigana',
-  imageSource: require('../../images/chicken-parmigiani.jpg'),
-  description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-}
-
-const recipes2 = [
-
-]
-
 const recipes = [
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  },
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  },
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  },
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  },
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  },
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  },
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  },
-  {
-    title: 'Chicken Parmigana',
-    imageSource: require('../../images/chicken-parmigiani.jpg'),
-    description: 'This is a Description of Food at the moment i have it as a max of 3 lines not sure what we should put though it will truncate if we go over'
-  }
+
 ]
 
-const categories = [
-  {
+const categories =  [
+    {
     title: 'Meats',
-    icon: 'opacity',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
   },
   {
     title: 'Grains',
     icon: 'flight-takeoff',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
+    subitems: [],
+    value: '0'
   },
   {
     title: 'Fruits',
     icon: 'flight-takeoff',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
+    subitems: [],
+    value: '0'
   },
   {
     title: 'Vegetables',
     icon: 'flight-takeoff',
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
+    subitems: [],
+    value: '0'
   },
   {
-    title: 'Wet Ingredients',
+    title: 'Wet',
     icon: 'flight-takeoff',
-    
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      },
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
+    subitems: [],
+    value: '0'
   },
   {
-    title: 'Dry Ingredients',
+    title: 'Dry',
     icon: 'flight-takeoff',
-    
-    subitems: [
-      {
-        title: 'Chicken Stock',
-        icon: 'opacity',
-        value: '6'
-      }, 
-      {
-        title: 'Milk',
-        icon: 'opacity',
-        value: '2'
-      },
-      {
-        title: 'Oil',
-        icon: 'opacity',
-        value: '64'
-      }
-    ],
-    value: '3'
+    subitems: [],
+    value: '0'
   },
-]
-
-
+  {
+    title: 'Dairy',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  {
+    title: 'Misc',
+    icon: 'flight-takeoff',
+    subitems: [],
+    value: '0'
+  },
+  ]
 
 const Item = Picker.Item;
 
@@ -254,7 +117,7 @@ export class ShoppingPage extends React.Component {
     for(count=0;count<6; count++){
       //below means we matched our category to an ingredient
       if(this.state.category2 == categories[count].title){
-        categories[count].subitems.push({title:this.state.ingredientType ,icon:'Oil',value:this.state.quantity});
+        categories[count].subitems.push({title:this.state.ingredientType ,type:'Volume',value:this.state.quantity});
         this.setState({dataSource: this.state.dataSource.cloneWithRows(categories)});
       }
     }
@@ -306,10 +169,19 @@ export class ShoppingPage extends React.Component {
     //todo implement filter
   }
 
-  _loadRecipes = async () =>{
+  transferData = ()=>{
     var count;
-    for(count = 0; count < 4; count++){
-      recipes2[count] = await AsyncStorage.getItem('rec1');
+    var count2;
+    //transfers ingredients from props
+    for(count = 0; count < 8; count ++){
+      for(count2 = 0; count2 < this.props.data.categories[count].subitems.length; count2++){
+        categories[count].subitems.push({title:this.props.data.categories[count].subitems[count2].title,type:this.props.data.categories[count].subitems[count2].type,value:this.props.data.categories[count].subitems[count2].type});
+      }
+    }
+    //transfers recipies from props
+    var count3;
+    for(count3 = 0; count3 < this.props.data.recipies.length; count3++){
+      recipes.push({title:this.props.data.recipies[count3].title,imageSource:this.props.data.recipies[count3].imageSource,description:this.props.data.recipies[count3].description})
     }
   }
 
@@ -338,7 +210,6 @@ export class ShoppingPage extends React.Component {
 
   constructor(props) {
     super(props);
-
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const ds2 = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
     this.state = {
@@ -356,12 +227,12 @@ export class ShoppingPage extends React.Component {
       quantity: '1',
       measurement2: 'oz.',
       category2: 'Meats',
+      loading: true,
     };
   };
 
   render(){
-    this.populateData();
-    this._loadRecipes();
+    this.transferData();
     return(
       <View style={styles.PantryView}>
         <Modal
@@ -431,7 +302,7 @@ export class ShoppingPage extends React.Component {
           visible={this.state.modalVisible2}
           transparent={true}
           animationType={"fade"}
-          onRequestClose={() => this._closeModal2()}
+          onRequestClose={() => this._closeModal3()}
         >
           <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -498,7 +369,7 @@ export class ShoppingPage extends React.Component {
                 <Button
                    title="Save Quantity"
                    color='#00ff7f'
-                   onPress= {() => this._closeModal2()}
+                   onPress= {() => this._closeModal3()}
                 />
               </View>
             </View>

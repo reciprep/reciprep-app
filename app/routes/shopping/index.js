@@ -3,24 +3,34 @@ import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 import ShoppingPage from './shoppingPage'
+import ShoppingLoad from './shoppingLoad'
+
+
 
 export class Shopping extends Component {
 
   _renderScene(route,navigator){
-
-    return <ShoppingPage navigator={navigator}/>
+    if(route.index=="shoppingLoad"){
+      return <ShoppingLoad navigator={navigator}/>
+    }
+    else if(route.index=="shoppingPage"){
+      console.log("in shopping page");
+      return <ShoppingPage navigator={navigator} data={route.data}/>
+    }
   }
-
+ 
+  
   _configureScene(route,routeStack){
     return Navigator.SceneConfigs.FloatFromBottom
   }
 
   render(){
+    //this.populateData()
     return(
       <View style={styles.page}>
         <Navigator
           style={{flex:3}}
-          initialRoute={{index: 'shopping' }}
+          initialRoute={{index: 'shoppingLoad'}}
           renderScene={this._renderScene}
           configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
         />

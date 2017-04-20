@@ -364,7 +364,7 @@ export class PantryPage extends React.Component {
           visible={this.state.modalVisible2}
           transparent={true}
           animationType={"fade"}
-          onRequestClose={() => this._closeModal2()}
+          onRequestClose={() => this._closeModal3()}
         >
           <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -431,7 +431,7 @@ export class PantryPage extends React.Component {
                 <Button
                    title="Save Quantity"
                    color='#00ff7f'
-                   onPress= {() => this._closeModal2()}
+                   onPress= {() => this._closeModal3()}
                 />
               </View>
             </View>
