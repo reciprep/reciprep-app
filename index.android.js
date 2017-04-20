@@ -9,6 +9,8 @@ import {
 
 import Landing from './app/routes/landing';
 import RecipeFeed from './app/routes/recipe_feed';
+import Shopping from './app/routes/shopping';
+import Pantry from './app/routes/pantry';
 import Toolbar from './app/components/toolbar';
 import Pantry from './app/routes/pantry';
 
