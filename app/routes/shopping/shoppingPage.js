@@ -112,7 +112,7 @@ export class ShoppingPage extends React.Component {
   }
 
   //the below modal will save the data
-  _closeModal3 = () =>{
+  _closeModal3 = async () =>{
     this.setState({modalVisible2: false});
     var count;
     var count2;
@@ -165,7 +165,7 @@ export class ShoppingPage extends React.Component {
     //todo implement filter
   }
 
-  deleteRecipe = (recipeName) =>{
+  deleteRecipe = async (recipeName) =>{
     var count;
     temp = await AsyncStorage.getItem('rec');
     temp = JSON.parse(temp);
@@ -496,7 +496,7 @@ var styles = StyleSheet.create({
 
   picker: {
     width: 100,
-    //flex:1 
+    //flex:1
     //flexDirection:'column'
   },
 

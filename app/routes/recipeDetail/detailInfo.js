@@ -14,7 +14,7 @@ export class DetailInfo extends Component{
   }
 
   hideRate = ()=>{
-    this.setState({showRate:false});  
+    this.setState({showRate:false});
   }
 
   makeRecipe = ()=>{
@@ -189,7 +189,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 10,
     borderRadius: 2,
-    height: 20
   },
   stepText:{
     textAlign: 'center',

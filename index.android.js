@@ -3,7 +3,7 @@ import { AppRegistry, StyleSheet, Text, Image, View, Navigator, AsyncStorage} fr
 
 import Landing from './app/routes/landing';
 import RecipeFeed from './app/routes/recipeFeed';
-// import Shopping from './app/routes/shopping';
+import Shopping from './app/routes/shopping/index.js';
 import Toolbar from './app/components/toolbar';
 import Pantry from './app/routes/pantry';
 import MainView from './app/routes/mainView';
