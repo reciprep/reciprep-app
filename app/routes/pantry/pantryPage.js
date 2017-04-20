@@ -147,12 +147,13 @@ export class PantryPage extends React.Component {
 
 
   //the below modal will save the data
-  _closeModal3 = async () =>{
+  _closeModal3 = async (navigator) =>{
     this.setState({modalVisible2: false});
     var count;
     var count2;
     var jsonObject = {ingredient_name: this.state.ingredientType, 'value': parseFloat(this.state.quantity)}
     var jsonObjectArr = [];
+    jsonObjectArr.push(jsonObject)
 
     for(count=0;count<8; count++){
       //below means we matched our category to an ingredient
@@ -174,7 +175,9 @@ export class PantryPage extends React.Component {
         .then( (response) => response.json())
         .then( (responseData) => {
           if(responseData['status'] == 'success'){
+            navigator.push({index: "pantryLoad"})
             Alert.alert("Ingredient Quantity Changed")
+
             console.log('Create request succeeded', responseData);
           }
           else{
@@ -460,7 +463,7 @@ export class PantryPage extends React.Component {
                 <Button
                    title="Save Quantity"
                    color='#00ff7f'
-                   onPress= {() => this._closeModal3()}
+                   onPress= {() => this._closeModal3(this.props.navigator)}
                 />
               </View>
             </View>
