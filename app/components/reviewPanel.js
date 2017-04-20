@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal} from 'react-native';
+import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal, Alert} from 'react-native';
 import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 import StarRating from 'react-native-star-rating';
 
@@ -7,9 +7,39 @@ import RecipeFeedStarRating from './recipeFeedStarRating'
 
 export class ReviewPanel extends Component{
 
-  sendRating = ()=>{
-    //do nothing for now
-  }
+  sendRating = async (closeModal)=>{
+    let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
+    console.log(this.state.starCount)
+    fetch('http://10.0.2.2:8000/api/recipe/'+this.props.recipe_id+'/rate',{
+      method: 'PUT',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json',
+        'Authorization': auth_token
+      },
+      body: JSON.stringify({
+        'value': this.state.starCount
+      })
+    })
+    .then( (response) => response.json())
+    .then( (responseData) => {
+      if(responseData['status'] == 'success'){
+        Alert.alert("Rating Submitted")
+        console.log('Rate request succeeded with response', responseData);
+        this.props.closeModal
+      }
+      else{
+        Alert.alert("Rating Failed")
+        console.log('Rate request failed with response', responseData);
+        this.props.closeModal
+      }
+      })
+      .catch( (error) => {
+        console.error(error);
+      });
+
+      closeModal
+    }
 
   onStarRatingPress(rating) {
     this.setState({
@@ -44,7 +74,7 @@ export class ReviewPanel extends Component{
             <Button buttonStyle={styles.rateButton}
                     title={"Submit Rating"} fontSize={20}
                     backgroundColor={"#dff442"} textStyle={styles.rateText}
-                    onPress={this.props.hideRate}/>
+                    onPress={()=>this.sendRating(this.props.hideRate)}/>
           </View>
         </View>
       </View>

@@ -39,10 +39,12 @@ class RecipeAdd extends Component{
       if(responseData['status'] == 'success'){
         Alert.alert("Recipe Created")
         console.log('Create requrest succeeded with response', responseData);
+        this.props.closeModal
       }
       else{
         Alert.alert("Recipe Creation Failed")
         console.log('Create request failed with response', responseData);
+        this.props.closeModal
       }
       })
       .catch( (error) => {

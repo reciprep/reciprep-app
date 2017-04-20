@@ -14,8 +14,33 @@ export class DetailInfo extends Component{
   }
 
   hideRate = ()=>{
-    this.setState({showRate:false});
+    this.setState({showRate:false});  
   }
+
+  makeRecipe = ()=>{
+
+  }
+
+  addRecipeToCart = (data) =>{
+    AsyncStorage.getItem('rec').then(
+      (result)=>{
+        result = JSON.parse(result)
+        // console.log(result)
+        if(result==null){
+          result=[]
+        }
+        subitem={
+          'title': data['name'],
+          'imageSource': 'http://www.novelupdates.com/img/noimagefound.jpg',
+          'description': data['description'],
+          'rating': data['rating']
+        }
+        result.push(subitem)
+        AsyncStorage.setItem('rec',JSON.stringify(result)).then(
+          (response)=>console.log(response)
+        )
+      })
+    }
 
   constructor(props){
     super(props);
@@ -53,6 +78,14 @@ export class DetailInfo extends Component{
                   </View>
                 )
               })}
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button buttonStyle={styles.makeButton}
+                      title={"Make"} fontSize={18}
+                      onPress={this.makeRecipe}/>
+              <Button buttonStyle={styles.shoppingButton}
+                      title={"Add to Cart"} fontSize={18}
+                      onPress={()=>this.addRecipeToCart(this.props.data)}/>
             </View>
             <View style={styles.ratingGroup}>
               <RecipeFeedStarRating rating={this.props.data['rating']} disabled={true}/>
@@ -180,6 +213,20 @@ var styles = StyleSheet.create({
   },
   rateText:{
     color:'black'
+  },
+  makeButton:{
+    marginBottom: 5,
+    marginTop: 5,
+    borderRadius: 5,
+    height: 28,
+    width: 150,
+  },
+  shoppingButton:{
+    marginBottom: 5,
+    marginTop: 5,
+    borderRadius: 5,
+    height: 28,
+    width: 150,
   }
 })
 

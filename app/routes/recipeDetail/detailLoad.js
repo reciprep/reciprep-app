@@ -22,7 +22,7 @@ export class DetailLoad extends Component{
       if(responseData['status'] == 'success'){
         navigator.push({index:'recipeDetail',
                         data: responseData['data']});
-        console.log('request succeeded with responseData');
+        console.log('request succeeded with response',responseData);
       }
       else{
         console.log('request failed with response', responseData);
