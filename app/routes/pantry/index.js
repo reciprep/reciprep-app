@@ -3,12 +3,19 @@ import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 import PantryPage from './pantryPage'
+import PantryLoad from './pantryLoad'
 
 export class Pantry extends Component {
 
   _renderScene(route,navigator){
-
-    return <PantryPage navigator={navigator}/>
+    if(route.index=='pantryPage'){
+      console.log("IN INDEX")
+      console.log(route.data)
+      return <PantryPage navigator={navigator} data={route.data}/>
+    }
+    if(route.index=='pantryLoad'){
+      return <PantryLoad navigator={navigator}/>
+    }
   }
 
   _configureScene(route,routeStack){
@@ -20,7 +27,7 @@ export class Pantry extends Component {
       <View style={styles.page}>
         <Navigator
           style={{flex:3}}
-          initialRoute={{index: 'pantry' }}
+          initialRoute={{index: 'pantryLoad' }}
           renderScene={this._renderScene}
           configureScene={ (route,routeStack) => Navigator.SceneConfigs.FadeAndroid}
         />
