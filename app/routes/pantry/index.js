@@ -78,6 +78,7 @@ export class Pantry extends Component {
           for(j=0;j<categories.length;j++){
             if(categories[j].title==route.data[i].category){
               categories[j].subitems.push(subitem)
+              categories[j].value = categories[j].subitems.length
             }
           }
         }
