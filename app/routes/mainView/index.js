@@ -5,6 +5,7 @@ import { Button, FormLabel, FormInput } from 'react-native-elements';
 import RecipeFeed  from '../recipeFeed';
 import Toolbar from '../../components/toolbar';
 import Pantry from '../pantry';
+import Shopping from '../shopping'
 
 export class MainView extends Component {
 
@@ -15,7 +16,8 @@ export class MainView extends Component {
            <Toolbar
              navigator={navigator}
              recipeColor='#ccff99'
-             pantryColor='#009933'/>
+             pantryColor='#009933'
+             shoppingColor='#009933'/>
            <RecipeFeed navigator={navigator}/>
          </View>
       );
@@ -26,8 +28,21 @@ export class MainView extends Component {
            <Toolbar
              navigator={navigator}
              recipeColor='#009933'
-             pantryColor='#ccff99'/>
+             pantryColor='#ccff99'
+             shoppingColor='#009933'/>
            <Pantry/>
+         </View>
+      );
+    }
+    else if (route.index =='shopping'){
+      return(
+         <View style={styles.page}>
+           <Toolbar
+             navigator={navigator}
+             recipeColor='#009933'
+             pantryColor='#009933'
+             shoppingColor='#ccff99'/>
+           <Shopping/>
          </View>
       );
     }
