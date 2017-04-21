@@ -268,6 +268,7 @@ export class ShoppingPage extends React.Component {
     this.setState({modalVisible2: false});
   }
 
+<<<<<<< HEAD
   //the below modal will save the data and close the add ingredient button
   _closeModal3 = () =>{
     this.setState({modalVisible2: false});
@@ -325,13 +326,6 @@ export class ShoppingPage extends React.Component {
     recipes = [];
   }
 
-  //deletes a recipe if the user is done with the recipe
-  deleteRecipe = (recipeName) =>{
-    var count;
-    for(count = 0; count < recipes.length; count++){
-      recipes.splice(count,1);
-    }
-  }
 
   transferData = ()=>{
     var count;
@@ -560,8 +554,6 @@ export class ShoppingPage extends React.Component {
               renderRow={(rowData) =>
                 <RecipeCard
                   title={rowData.title}
-                  showDetail={deleteRecipe(title)}
-                  imageSource={rowData.imageSource}
                   description={rowData.description} />
               }/>
             </View>
@@ -582,7 +574,7 @@ export class ShoppingPage extends React.Component {
           reverse
           size = {30}
           title='delete'
-          name='add'
+          name='swap-horiz'
           raised = {true}
           zIndex = {1000}
           color='#517fa4'/>
@@ -673,7 +665,7 @@ var styles = StyleSheet.create({
 
   picker: {
     width: 100,
-    //flex:1 
+    //flex:1
     //flexDirection:'column'
   },
 
@@ -696,7 +688,7 @@ var styles = StyleSheet.create({
     position: 'absolute',
     bottom:15,
     right:15
-  }
+  },
   deleteItem:{
     position: 'absolute',
     bottom:15,

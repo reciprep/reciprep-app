@@ -20,7 +20,7 @@ export class Toolbar extends Component {
   };
 
   setShoppingActive () {
-    this.props.navigator.push({index:'shoppingFeed'})
+    this.props.navigator.push({index:'shopping'})
   };
 
   async clearAuth ()  {
@@ -58,8 +58,8 @@ export class Toolbar extends Component {
         />
         <Button
           title='Shopping'
-          backgroundColor = {this.props.ShoppingColor}
-          buttonStyle={styles.ShoppingButton}
+          backgroundColor = {this.props.shoppingColor}
+          buttonStyle={styles.shoppingButton}
           raised
           color = 'black'
           onPress={() => this.setShoppingActive()}

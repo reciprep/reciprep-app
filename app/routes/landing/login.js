@@ -1,10 +1,14 @@
+//React Imports
 import React, { Component } from 'react';
 import { StyleSheet, Alert, Text, View, Navigator, AsyncStorage } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 
+//Class to Represent the Login Page
 export class LogIn extends Component {
 
+  /*Login Function, Reaches Data Endpoint with Username and password
+  If Successful, returns an auth_token to be stored locally */
   _loginFunction = () => {
     fetch('http://10.0.2.2:8000/api/auth/login',{
       method: 'POST',
@@ -33,6 +37,7 @@ export class LogIn extends Component {
     });
   };
 
+  /*Sends up to Navigator of Parent to view signup page */
   _signupFunction = () => {
     this.props.navigator.push({index: 'signup'});
   };

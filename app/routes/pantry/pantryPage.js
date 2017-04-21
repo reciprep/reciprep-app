@@ -156,6 +156,10 @@ export class PantryPage extends React.Component {
 
   //this is for closing our our ingredient change modal
   _closeModal2 = () =>{
+    this.setState({modalVisible: false});
+  }
+
+  _closeModal4 = () =>{
     this.setState({modalVisible2: false});
   }
 
@@ -169,6 +173,7 @@ export class PantryPage extends React.Component {
     var count2;
     var jsonObject = {ingredient_name: this.state.ingredientType, 'value': parseFloat(this.state.quantity)}
     var jsonObjectArr = [];
+    jsonObjectArr.push(jsonObject)
 
     for(count=0;count<8; count++){
       //below means we matched our category to an ingredient
@@ -190,7 +195,9 @@ export class PantryPage extends React.Component {
         .then( (response) => response.json())
         .then( (responseData) => {
           if(responseData['status'] == 'success'){
+            navigator.push({index: "pantryLoad"})
             Alert.alert("Ingredient Quantity Changed")
+
             console.log('Create request succeeded', responseData);
           }
           else{
@@ -285,20 +292,12 @@ export class PantryPage extends React.Component {
     return(
 
       <View style={styles.PantryView}>
-        <Icon
-          containerStyle={styles.newItem}
-          onPress={() => this._setModalVisible2(true)}
-          reverse
-          size = {30}
-          title='newItem'
-          name='add'
-          raised = {true}
-          color='#517fa4'/>
+
         <Modal
           visible={this.state.modalVisible}
           transparent={true}
           animationType={"fade"}
-          onRequestClose={() => this._closeModal()}
+          onRequestClose={() => this._closeModal2()}
         >
           <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -361,7 +360,7 @@ export class PantryPage extends React.Component {
           visible={this.state.modalVisible2}
           transparent={true}
           animationType={"fade"}
-          onRequestClose={() => this._closeModal3()}
+          onRequestClose={() => this._closeModal4()}
         >
           <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -478,17 +477,28 @@ export class PantryPage extends React.Component {
                 <Button
                    title="Save Quantity"
                    color='#00ff7f'
-                   onPress= {() => this._closeModal3()}
+                   onPress= {() => this._closeModal3(this.props.navigator)}
                 />
               </View>
             </View>
           </View>
         </Modal>
-        <Accordion
-          sections={this.props.data}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-        />
+        <ScrollView>
+          <Accordion
+            sections={this.props.data}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+          />
+        </ScrollView>
+        <Icon
+          containerStyle={styles.newItem}
+          onPress={() => this._setModalVisible2(true)}
+          reverse
+          size = {30}
+          title='newItem'
+          name='add'
+          raised = {true}
+          color='#517fa4'/>
       </View>
     );
   }

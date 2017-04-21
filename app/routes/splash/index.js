@@ -1,13 +1,16 @@
+// Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator,Image, AsyncStorage} from 'react-native';
 
+//Imports from Local Files
 import Landing from '../landing';
 import MainView from '../mainView';
 
+//Splash page that runs while loading occurs
 export default class Splash extends Component {
 
-
-
+  //GET call, checks if valid Auth Token, if so moves to Main View if not
+  // move to login page
   autoLogin = async (navigator) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
     fetch('http://10.0.2.2:8000/api/auth/status',{
@@ -45,6 +48,7 @@ export default class Splash extends Component {
     );}
 }
 
+//stylesheet
 var styles = StyleSheet.create({
   mainView:{
     flex: 1,
