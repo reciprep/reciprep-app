@@ -9,6 +9,8 @@ import RecipeCard from '../../components/recipeCard';
 
 var ReactNative = require('react-native');
 
+
+//sample recipes for our testing of the shopping list page
 const recipes = [
   {
     title: 'Chicken Parmigana',
@@ -52,6 +54,7 @@ const recipes = [
   }
 ]
 
+//category storage for local UI testing of the shopping list page
 const categories =  [
     {
     title: 'Meats',
@@ -219,9 +222,10 @@ const categories =  [
   ]
 
 const Item = Picker.Item;
-
+//our shopping page class
 export class ShoppingPage extends React.Component {
 
+  //where we render headers similar to pantrypage
   _renderHeader = (section) =>{
     return(
       <View>
@@ -233,6 +237,7 @@ export class ShoppingPage extends React.Component {
     );
   };
 
+  //pulled from pantry page - how to render our modal for ingredient changes
   _setModalVisible = (visible,name, quantity, i, sectionID) => {
     this.setState({ingredient: name});
     this.setState({modalVisible: visible});
@@ -241,10 +246,13 @@ export class ShoppingPage extends React.Component {
     this.setState({category: sectionID});
   };
 
+  //setting modal for shopping list additions visible
+
   _setModalVisible2 = (visible) =>{
     this.setState({modalVisible2: visible});
   };
 
+  //closing and saving data from changing quantity of an ingredient
   _closeModal = () =>{
       this.setState({modalVisible: false});
       var count;
@@ -255,12 +263,12 @@ export class ShoppingPage extends React.Component {
       }
   };
 
-
+  //closing of a modal and not saving data
   _closeModal2 = () =>{
     this.setState({modalVisible2: false});
   }
 
-  //the below modal will save the data
+  //the below modal will save the data and close the add ingredient button
   _closeModal3 = () =>{
     this.setState({modalVisible2: false});
     var count;
@@ -274,11 +282,13 @@ export class ShoppingPage extends React.Component {
     }
   };
 
+  //removing an ingredient from the shopping list
   _Remove =() => {
     this.state.text = '0';
     this._closeModal();
   }
 
+  //below functions edit quantities in the shopping list for ingreidents 
   _Increment = () => {
     this.setState({text: (parseInt(this.state.text, 10) + 1).toString()})
   };
@@ -309,11 +319,13 @@ export class ShoppingPage extends React.Component {
     //todo implement filter
   }
 
+  //deletes all of our data given a user has purchased the ingredients
   _deleteAll = () =>{
     categories = [];
     recipes = [];
   }
 
+  //deletes a recipe if the user is done with the recipe
   deleteRecipe = (recipeName) =>{
     var count;
     for(count = 0; count < recipes.length; count++){
@@ -337,6 +349,8 @@ export class ShoppingPage extends React.Component {
     }
   }
 
+  //this is where we render content in the accordion view to show the ingredients
+  //that are in the shopping list
   _renderContent = (section) =>{
     return (
       <View style={{flex:1,flexDirection:'row'}}>
@@ -360,6 +374,8 @@ export class ShoppingPage extends React.Component {
     );
   };
 
+
+  //constructor for our shopping list which populates our data and sets our state variables
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -383,6 +399,11 @@ export class ShoppingPage extends React.Component {
     };
   };
 
+  //rendering of our page, done similar to pantry page
+  //first we render the modals, then we render our shopping list
+  //then we render our recipe list. all of these are contained within
+  //a scroll view for viewing purposes. Ontop of these we have overlayed a toolbar
+  //as well as 2 buttons for adding ingredients or clearing the shopping list
   render(){
     //this.transferData();
     return(
@@ -569,6 +590,7 @@ export class ShoppingPage extends React.Component {
     );
   }
 
+  //checks for changes to our values within the UI/component values
   onValueChange = (key: string, value: string) => {
     const newState = {};
     newState[key] = value;
@@ -578,7 +600,7 @@ export class ShoppingPage extends React.Component {
 
 
 
-//BackgroundColor 30415D,015249, 4ABDAC
+//below is our styling for the entire page and ensuring it follows other pages styles
 var styles = StyleSheet.create({
   Header:{
     flex:3,

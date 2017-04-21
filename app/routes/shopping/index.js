@@ -9,6 +9,7 @@ import ShoppingLoad from './shoppingLoad'
 
 export class Shopping extends Component {
 
+  //this is where we render our loading or regular shopping list screen
   _renderScene(route,navigator){
     if(route.index=="shoppingLoad"){
       return <ShoppingLoad navigator={navigator}/>
@@ -19,11 +20,12 @@ export class Shopping extends Component {
     }
   }
  
-  
+  //configuring the scene for our shopping list
   _configureScene(route,routeStack){
     return Navigator.SceneConfigs.FloatFromBottom
   }
 
+  //rendering our actual shopping list for the full page
   render(){
     //this.populateData()
     return(
@@ -40,7 +42,7 @@ export class Shopping extends Component {
   }
 }
 
-//BackgroundColor 30415D,015249, 4ABDAC
+//temporary style sheet for our pantry page
 var styles = StyleSheet.create({
   page:{
     backgroundColor: '#4ABDAC',

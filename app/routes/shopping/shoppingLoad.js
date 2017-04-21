@@ -9,6 +9,7 @@ import RecipeCard from '../../components/recipeCard';
 
 var ReactNative = require('react-native');
 
+//test data for our recipe shopping list page
 const dataFinal = {
   recipies: [
     {
@@ -23,6 +24,7 @@ const dataFinal = {
     },
   ],
 
+  //place holder data for the recipe shopping list page
   categories: [
     {
     title: 'Meats',
@@ -76,9 +78,10 @@ const dataFinal = {
 }
 
 
-
+//this is the shopping loading page class
 export class ShoppingLoad extends React.Component {
 
+  //this is where we load in any async data for the shopping list
   _loadDetails = async (navigator) =>{
     //var count;
     //var count2;
@@ -90,11 +93,13 @@ export class ShoppingLoad extends React.Component {
                     data: dataFinal});
   }
 
+  //binding constructor for our load details function
   constructor(props) {
     super(props);
     this._loadDetails = this._loadDetails.bind(this);
   }
 
+  //where we render the loading screen
   render(){
     this._loadDetails(this.props.navigator)
     return(
@@ -109,7 +114,7 @@ export class ShoppingLoad extends React.Component {
 
 
 
-//BackgroundColor 30415D,015249, 4ABDAC
+//style sheets necessary for the loading screen
 var styles = StyleSheet.create({
   Header:{
     flex:3,
