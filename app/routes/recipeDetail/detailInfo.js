@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal} from 'react-native';
+import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal, Alert} from 'react-native';
 import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 
 import RecipeFeedStarRating from '../../components/recipeFeedStarRating'
@@ -17,8 +17,30 @@ export class DetailInfo extends Component{
     this.setState({showRate:false});
   }
 
-  makeRecipe = ()=>{
-
+  makeRecipe = async (recipe_id)=>{
+    let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
+    fetch('http://10.0.2.2:8000/api/recipe/'+recipe_id+'/prepare',{
+      method: 'PUT',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json',
+        'Authorization': auth_token
+      }
+    })
+    .then( (response) => response.json())
+    .then( (responseData) => {
+      if(responseData['status'] == 'success'){
+        Alert.alert("Recipe Made")
+        console.log('Prepare request succeeded with response', responseData);
+      }
+      else{
+        Alert.alert("Making Failed")
+        console.log('Preapre request failed with response', responseData);
+      }
+      })
+      .catch( (error) => {
+        console.error(error);
+      });
   }
 
   addRecipeToCart = (data) =>{
@@ -82,7 +104,7 @@ export class DetailInfo extends Component{
             <View style={styles.buttonContainer}>
               <Button buttonStyle={styles.makeButton}
                       title={"Make"} fontSize={18}
-                      onPress={this.makeRecipe}/>
+                      onPress={()=>this.makeRecipe(this.props.data['recipe_id'])}/>
               <Button buttonStyle={styles.shoppingButton}
                       title={"Add to Cart"} fontSize={18}
                       onPress={()=>this.addRecipeToCart(this.props.data)}/>

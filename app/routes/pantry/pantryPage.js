@@ -142,6 +142,10 @@ export class PantryPage extends React.Component {
   }
 
   _closeModal2 = () =>{
+    this.setState({modalVisible: false});
+  }
+
+  _closeModal4 = () =>{
     this.setState({modalVisible2: false});
   }
 
@@ -270,20 +274,12 @@ export class PantryPage extends React.Component {
     return(
 
       <View style={styles.PantryView}>
-        <Icon
-          containerStyle={styles.newItem}
-          onPress={() => this._setModalVisible2(true)}
-          reverse
-          size = {30}
-          title='newItem'
-          name='add'
-          raised = {true}
-          color='#517fa4'/>
+
         <Modal
           visible={this.state.modalVisible}
           transparent={true}
           animationType={"fade"}
-          onRequestClose={() => this._closeModal()}
+          onRequestClose={() => this._closeModal2()}
         >
           <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -346,7 +342,7 @@ export class PantryPage extends React.Component {
           visible={this.state.modalVisible2}
           transparent={true}
           animationType={"fade"}
-          onRequestClose={() => this._closeModal3()}
+          onRequestClose={() => this._closeModal4()}
         >
           <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -469,11 +465,22 @@ export class PantryPage extends React.Component {
             </View>
           </View>
         </Modal>
-        <Accordion
-          sections={this.props.data}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-        />
+        <ScrollView>
+          <Accordion
+            sections={this.props.data}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+          />
+        </ScrollView>
+        <Icon
+          containerStyle={styles.newItem}
+          onPress={() => this._setModalVisible2(true)}
+          reverse
+          size = {30}
+          title='newItem'
+          name='add'
+          raised = {true}
+          color='#517fa4'/>
       </View>
     );
   }
