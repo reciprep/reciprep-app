@@ -1,28 +1,35 @@
+//Import from React
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View,	Navigator, AsyncStorage} from 'react-native';
 import { Button, FormLabel,	FormInput} from 'react-native-elements';
 
+//Toolbar on top of the mainview
 export class Toolbar extends Component {
 
   constructor() {
   	super();
 }
+  //changes the button state to recipe
   setButtonState(props) {
   	this.setState({isRecipe: props});
   };
 
+  //activate the pantry view
   setPantryActive () {
     this.props.navigator.push({index:'pantry'})
   };
 
+  //activate the recipe view
   setRecipeActive () {
     this.props.navigator.push({index:'recipeFeed'})
   };
 
+  //activate the shopping view
   setShoppingActive () {
     this.props.navigator.push({index:'shopping'})
   };
 
+  //clear the auth token
   async clearAuth ()  {
     const result2 = await AsyncStorage.removeItem('auth_token');
   };

@@ -1,6 +1,8 @@
+//Imports from React
 import React, { Component } from 'react';
 import StarRating from 'react-native-star-rating';
 
+//Component to display a rating in stars
 class RecipeFeedStarRating extends Component {
 
   constructor(props) {
@@ -10,6 +12,7 @@ class RecipeFeedStarRating extends Component {
     };
   }
 
+  //update the star count
   onStarRatingPress(rating) {
     this.setState({
       starCount: rating

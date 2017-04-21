@@ -1,10 +1,14 @@
+//Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage} from 'react-native';
 import { Button, SearchBar, Icon, Card } from 'react-native-elements';
 
+/*Class to load the recipe detail information from the server and send to the
+detailInfo component */
 export class DetailLoad extends Component{
 
-
+  /* HTTP Get request, given a recipie_id and auth_token returns the Details
+    of the recipe  */
   _loadDetails = async (navigator,recipeID) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
     console.log(recipeID)

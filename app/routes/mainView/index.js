@@ -13,6 +13,7 @@ import Shopping from '../shopping'
 switching between tabs*/
 export class MainView extends Component {
 
+  /*establishes how to properly navigate between views after toolbar presses*/
   _renderScene(route,navigator){
     if (route.index=='recipeFeed'){
       return(
@@ -56,6 +57,7 @@ export class MainView extends Component {
     }
   }
 
+  //how to load scene transition
   _configureScene(route,routeStack){
     return Navigator.SceneConfigs.FloatFromBottom
   }

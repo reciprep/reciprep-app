@@ -1,12 +1,16 @@
+//Import from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal, Alert} from 'react-native';
 import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 import StarRating from 'react-native-star-rating';
 
+//Import from Local
 import RecipeFeedStarRating from './recipeFeedStarRating'
 
+//Panel to allow a user to review a recipe
 export class ReviewPanel extends Component{
 
+  //HTTP PUT request that sends the user's review to the backend
   sendRating = async (closeModal)=>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
     console.log(this.state.starCount)
@@ -41,6 +45,7 @@ export class ReviewPanel extends Component{
       closeModal
     }
 
+  //Updates the rating
   onStarRatingPress(rating) {
     this.setState({
       starCount: rating

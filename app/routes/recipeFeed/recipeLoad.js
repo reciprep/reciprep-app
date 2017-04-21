@@ -1,10 +1,12 @@
+//Import from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage} from 'react-native';
 import { Button, SearchBar, Icon, Card } from 'react-native-elements';
 
+//Import from Local
 export class RecipeLoad extends Component{
 
-
+  //HTTP GET request to receive all relevant recipes based on search criteria
   _loadRecipes = async (navigator) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
     fetch('http://10.0.2.2:8000/api/recipe/search?filter=true',{

@@ -1,22 +1,27 @@
+//Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal, Alert} from 'react-native';
 import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 
+//Imports from Local
 import RecipeFeedStarRating from '../../components/recipeFeedStarRating'
 import ReviewPanel from '../../components/reviewPanel'
 
 
-
+// Class to Display Recipe Detail View
 export class DetailInfo extends Component{
 
+  //shows Rating Modal
   rateRecipe = ()=>{
     this.setState({showRate:true});
   }
 
+  //hides Rating Modal
   hideRate = ()=>{
     this.setState({showRate:false});
   }
 
+  //HTTP PUT request to consume the ingredients from the users pantry
   makeRecipe = async (recipe_id)=>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
     fetch('http://10.0.2.2:8000/api/recipe/'+recipe_id+'/prepare',{
@@ -43,6 +48,7 @@ export class DetailInfo extends Component{
       });
   }
 
+  //AsynC Call to add recipe to Shopping Cart
   addRecipeToCart = (data) =>{
     AsyncStorage.getItem('rec').then(
       (result)=>{

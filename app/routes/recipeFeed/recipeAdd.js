@@ -1,11 +1,13 @@
+//Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal, Alert} from 'react-native';
 import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 
-
+//Component to add a new recipe to the database
 class RecipeAdd extends Component{
 
-
+/*HTTP POST request that takes the data information from the forum and
+ sends it to the backend */
   makeNewRecipe = async () =>{
     let finalIngredientList=[]
     for(i=0;i<this.state.ingredientList.length;i++){
@@ -51,7 +53,8 @@ class RecipeAdd extends Component{
         console.error(error);
       });
   }
-
+  /*Function to create a new step field in the modal and add a new paramater in
+  The return array for the new step */
   addStepField = () =>{
     var temp = this.state.recipeStepCount + 1
     this.setState({recipeStepCount: temp})
@@ -64,6 +67,8 @@ class RecipeAdd extends Component{
     this.setState({dataSource: this.state.dataSource.cloneWithRows(tempArray)})
   }
 
+  /*Function to remove a step field in the modal and to remove that step from
+  the correct index in the data array*/
   removeStep = (index) =>{
     var temp = this.state.recipeStepCount - 1
     this.setState({recipeStepCount: temp})
@@ -76,6 +81,8 @@ class RecipeAdd extends Component{
     this.setState({dataSource: this.state.dataSource.cloneWithRows(tempArray)})
   }
 
+/*Function to add a new ingredient in the modal and to add the ability to store
+a new string in the data field*/
   addIngredientField = () =>{
     var temp = this.state.ingredientListCount + 1
     this.setState({ingredientListCount: temp})
@@ -88,6 +95,8 @@ class RecipeAdd extends Component{
     this.setState({ingredientSource: this.state.ingredientSource.cloneWithRows(tempArray)})
   }
 
+/*Function to remove an ingredient field from the modal and the removal of
+that index of the data array*/
   removeIngredient = (index) =>{
     var temp = this.state.ingredientListCount - 1
     this.setState({ingredientListCount: temp})

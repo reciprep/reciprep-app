@@ -1,11 +1,13 @@
+//Import from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal} from 'react-native';
 import { Button, SearchBar, Icon, Card, FormLabel, FormInput } from 'react-native-elements';
 
-
+//Import Locally
 import DetailLoad from './detailLoad'
 import DetailInfo from './detailInfo'
 
+//Class to Navigate between Recipe Detail Loading/Info
 export class RecipeDetail extends Component{
 
   _renderScene = (route,navigator) =>{

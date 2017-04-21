@@ -1,23 +1,28 @@
+// Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Navigator, Image, ScrollView, ListView, AsyncStorage, Modal} from 'react-native';
 import { Button, SearchBar, Icon, Card, CheckBox } from 'react-native-elements';
 
+// Imports from Local
 import RecipeCard from '../../components/recipeCard';
 import RecipeDetail from '../recipeDetail';
 import RecipeAdd from './recipeAdd';
 
-
+// Class to display all recipes relevant to the user in a list
 export class RecipeList extends Component{
 
+  // hides the recipe detail popup
   hideDetail = () =>{
     this.setState({showDetail:false});
   }
 
+  // enables the recipe detail popup
   showDetail = (recipeID) =>{
     this.setState({showDetail:true});
     this.setState({modalRecipeID: recipeID});
   }
 
+  //HTTP Get fucntion to return all recipies based on search criteria
   _searchFunction = async (navigator)=>{
     let updatedSearchCriteria = this.state.searchCriteria.replace(' ','+');
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
@@ -51,18 +56,17 @@ export class RecipeList extends Component{
     });
   }
 
-
+  //enables add recipie modal
   _addRecipe = ()=>{
     this.setState({addRecipe: true});
   }
-
+  //hides add recipe modal
   _hideModal = () =>{
     this.setState({addRecipe: false});
   }
 
+  // toggles checkmark in toolbar
   toggleCheck = () =>{
-    console.log("HERE")
-
     if (this.state.checked){
       this.setState({checked: false})
     }

@@ -1,9 +1,12 @@
+//Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 
+//Imports from Local
 import RecipeFeedStarRating from './recipeFeedStarRating';
 
+//Compoonent to neatly display brief information concerning a recipe
 export class RecipeCard extends Component{
   render(){
     return(
