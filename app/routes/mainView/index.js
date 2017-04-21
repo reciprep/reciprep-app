@@ -1,12 +1,16 @@
+//Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Alert, Text, View, Navigator } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
+//Local Imports
 import RecipeFeed  from '../recipeFeed';
 import Toolbar from '../../components/toolbar';
 import Pantry from '../pantry';
 import Shopping from '../shopping'
 
+/* Class contians the logic of rendering the main view, handles the routing of
+switching between tabs*/
 export class MainView extends Component {
 
   _renderScene(route,navigator){

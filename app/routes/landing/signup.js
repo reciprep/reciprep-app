@@ -1,10 +1,13 @@
+// Imports from React
 import React, { Component } from 'react';
 import { StyleSheet, Alert, Text, View, Navigator, AsyncStorage } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
-
+/*Class to represent the view and functionality of the Signup Page  */
 export class SignUp extends Component {
 
+  /* Sends HTTP POST request of email,username,password to server
+  if valid signup credentials returns a valid auth_token, else returns an error*/
   _signupFunction = () => {
     fetch('http://10.0.2.2:8000/api/auth/register',{
       method: 'POST',
