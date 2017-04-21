@@ -13,6 +13,8 @@ const wet_Ingredients = [
 
 ]
 
+//below is static data that is to be filled with data once the loading screen
+//is passed up and the pantry screen is fully rendered
 const categories =  [
     {
     title: 'MEATS',
@@ -66,9 +68,12 @@ const categories =  [
 
 const Item = Picker.Item;
 
+
+//below is the pantry class which allows for our pantry page to be displayed.
 export class PantryPage extends React.Component {
 
 
+  //this is to render a section header in our accordion view of the pantry
   _renderHeader = (section) =>{
     return(
       <View>
@@ -80,6 +85,9 @@ export class PantryPage extends React.Component {
     );
   };
 
+
+  //this makes visible our ingredient edit modal. When we edit within here we are able
+  //to change the value of an ingredient on our pantry page
   _setModalVisible = (visible,name, quantity, i, sectionID) => {
     this.setState({ingredient: name});
     this.setState({modalVisible: visible});
@@ -88,10 +96,13 @@ export class PantryPage extends React.Component {
     this.setState({category: sectionID});
   };
 
+  //sets our ingredient add modal visible when we want to add an ingredient to our pantry
   _setModalVisible2 = (visible) =>{
     this.setState({modalVisible2: visible});
   };
 
+  //below is how we close our modal view and save our data to the backend once closing
+  //the modal - this only gets called if the user selects change ingredient quantity
   _closeModal = async () =>{
       this.setState({modalVisible: false});
       var count;
@@ -130,6 +141,8 @@ export class PantryPage extends React.Component {
       }
   };
 
+  //transfer data function below is used to transfer our data from async to our UI
+  //this is useful for storing the data locally.
   transferData = ()=>{
     var count;
     var count2;
@@ -141,6 +154,7 @@ export class PantryPage extends React.Component {
     }
   }
 
+  //this is for closing our our ingredient change modal
   _closeModal2 = () =>{
     this.setState({modalVisible: false});
   }
@@ -150,8 +164,10 @@ export class PantryPage extends React.Component {
   }
 
 
-  //the below modal will save the data
-  _closeModal3 = async (navigator) =>{
+  //the below modal will save the data from our add ingredient function
+  //this is used to add the ingredient to our database as well as to the UI
+  //which will then refresh the entire page to show our new updated ingredient list
+  _closeModal3 = async () =>{
     this.setState({modalVisible2: false});
     var count;
     var count2;
@@ -195,37 +211,27 @@ export class PantryPage extends React.Component {
     }
   };
 
-  _Remove =() => {
-    {/*var count;
-    var count2;
-    for(count=0; count<6; count++){
-      if(this.state.category == categories[count].title){
-        for(count2=0; count < categories[count].subitems.length; count2++){
-          if(categories[count].subitems[count2].title == this.state.ingredient){
-            categories[count].subitems[count2].value = '0';
-            categories[count].subitems.splice(count2,1);
-          }
-        }
-      }
-    }*/}
-    this._closeModal();
-  }
-
+  //this increments our ingredient in our first modal
   _Increment = () => {
     this.setState({text: (parseInt(this.state.text, 10) + 1).toString()})
 
   };
+  //this decrements our ingrednet in our first modal
   _Decrement = () => {
     this.setState({text: (parseInt(this.state.text, 10) - 1).toString()})
   };
 
+  //this incremenets our ingredient in our second modal
   _Increment2 = () => {
     this.setState({quantity: (parseInt(this.state.quantity, 10) + 1).toString()})
   };
+  //this decrements our ingredient in our second modal
   _Decrement2 = () => {
     this.setState({quantity: (parseInt(this.state.quantity, 10) - 1).toString()})
   };
 
+  //the below function  is used to render the content sections in our accordion view.
+  //it is only for displaying individual ingredients
   _renderContent = (section) =>{
     return (
       <View style={{flex:1,flexDirection:'row'}}>
@@ -249,6 +255,9 @@ export class PantryPage extends React.Component {
     );
   };
 
+  //constructor for the pantry page which allows for props to be passed in to
+  //allow for data transfer from outside of the pantry page such that we can load
+  //in our ingredients from the database
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -269,6 +278,15 @@ export class PantryPage extends React.Component {
     };
   };
 
+
+  //render function below is for rendering our entire pantry page
+  //firstly we render 2 seperate modals, one for adding ingredients
+  //and one of them for changing the quantity of an already
+  //existing ingredients
+  //after this we render in a scrollview which has an accordion view
+  //within it for displaying our ingredients and their sections
+  //ontop of all of this our headers are layed out as well as an add
+  //button ontop of that for adding an ingredient
   render(){
     this.transferData();
     return(
@@ -485,6 +503,7 @@ export class PantryPage extends React.Component {
     );
   }
 
+  //this function checks for changes in UI/component values
   onValueChange = (key: string, value: string) => {
     const newState = {};
     newState[key] = value;
@@ -494,7 +513,8 @@ export class PantryPage extends React.Component {
 
 
 
-//BackgroundColor 30415D,015249, 4ABDAC
+//below is the styles sheet for our pantry page such that we can properly
+//display and style the components.
 var styles = StyleSheet.create({
   Header:{
     flex:3,
