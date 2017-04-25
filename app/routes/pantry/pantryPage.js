@@ -167,7 +167,7 @@ export class PantryPage extends React.Component {
   //the below modal will save the data from our add ingredient function
   //this is used to add the ingredient to our database as well as to the UI
   //which will then refresh the entire page to show our new updated ingredient list
-  _closeModal3 = async () =>{
+  _closeModal3 = async (navigator) =>{
     this.setState({modalVisible2: false});
     var count;
     var count2;
@@ -237,10 +237,10 @@ export class PantryPage extends React.Component {
       <View style={{flex:1,flexDirection:'row'}}>
         <View style={styles.BufferFlex}></View>
         <View style={{flex:8}}>
-          <List containerStyle={{marginTop:-2, elevation:30}}>{
+          <List containerStyle={{marginTop:-2, elevation:10}}>{
             section.subitems.map((item,i)=>(
               <ListItem
-                containerStyle={{backgroundColor:'#66d1c1'}}
+                containerStyle={{backgroundColor:'#EFE9F4', borderBottomColor: '#AAB9B9', borderBottomWidth: 1}}
                 onPress={() => {this._setModalVisible(true,item.title,item.value.toString(),i, section.title)}}
                 key = {i}
                 title = {item.title}
@@ -540,15 +540,16 @@ var styles = StyleSheet.create({
   PantryView:{
     flex:1,
     // justifyContent: 'center'
+    backgroundColor: '#EFE9F4'
   },
 
   titleStyleSubItem:{
     fontSize: 14
   },
 
-  BufferFlex:{
+  BufferFlex:{ //BBCBCB
     flex:1,
-    backgroundColor: '#4ABDAC'
+    backgroundColor: '#AAB9B9'
   },
 
   ListViewCustom:{
@@ -581,7 +582,8 @@ var styles = StyleSheet.create({
   newItem:{
     position: 'absolute',
     bottom:15,
-    right:15
+    right:15,
+    backgroundColor:'#EC9A29'
   }
 });
 

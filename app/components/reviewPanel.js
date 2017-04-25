@@ -78,7 +78,7 @@ export class ReviewPanel extends Component{
           <View style={styles.buttonContianer}>
             <Button buttonStyle={styles.rateButton}
                     title={"Submit Rating"} fontSize={20}
-                    backgroundColor={"#dff442"} textStyle={styles.rateText}
+                    backgroundColor={"#EC9A29"} textStyle={styles.rateText}
                     onPress={()=>this.sendRating(this.props.hideRate)}/>
           </View>
         </View>

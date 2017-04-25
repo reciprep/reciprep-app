@@ -49,7 +49,7 @@ var styles = StyleSheet.create({
   },
   feed:{
     flex: 8,
-    backgroundColor: '#4ABDAC'
+    backgroundColor: '#F1B563'
   }
 });
 

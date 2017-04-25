@@ -42,13 +42,14 @@ export class Toolbar extends Component {
           title=''
           buttonStyle={styles.settingsButton}
           icon={{name:'menu',
-                 color:'black',
+                 color:'white',
                  size: 36}}
           raised
           onPress={() => this.clearAuth()}
         />
         <Button
           title='Recipes'
+          textStyle={{color:'white',fontWeight:'bold',fontSize:15}}
           backgroundColor = {this.props.recipeColor}
           buttonStyle={styles.recipeButton}
           raised
@@ -57,19 +58,12 @@ export class Toolbar extends Component {
         />
         <Button
           title='Pantry'
+          textStyle={{color:'white',fontWeight:'bold',fontSize:15}}
           backgroundColor = {this.props.pantryColor}
           buttonStyle={styles.pantryButton}
           raised
           color = 'black'
           onPress={() => this.setPantryActive()}
-        />
-        <Button
-          title='Shopping'
-          backgroundColor = {this.props.shoppingColor}
-          buttonStyle={styles.shoppingButton}
-          raised
-          color = 'black'
-          onPress={() => this.setShoppingActive()}
         />
       </View>
     )
@@ -101,20 +95,23 @@ var styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 0,
     marginBottom: 0,
-    width: 97,
-    borderWidth: 2,
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
+    width: 147,
+    borderColor: "#EC9A29",
+    borderWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
   },
   pantryButton:{
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
     marginBottom: 0,
-    width: 97,
-    borderWidth: 2,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
+    width: 147,
+    borderColor: "#EC9A29",
+
+    borderWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
   },
   shoppingButton:{
     marginTop: 0,
@@ -127,14 +124,16 @@ var styles = StyleSheet.create({
     borderRightWidth: 0,
   },
   settingsButton:{
-  	backgroundColor:'#009933',
+  	backgroundColor:'#F1B563',
+    alignItems: 'center',
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
     marginBottom: 0,
     width: 70,
-    borderWidth: 2,
+    borderColor: "#EC9A29",
+    borderWidth: 1,
     borderLeftWidth: 0,
-    borderRightWidth: 1,
+    borderRightWidth: 2,
   },
 });

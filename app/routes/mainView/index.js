@@ -20,9 +20,9 @@ export class MainView extends Component {
          <View style={styles.page}>
            <Toolbar
              navigator={navigator}
-             recipeColor='#ccff99'
-             pantryColor='#009933'
-             shoppingColor='#009933'/>
+             recipeColor='#EC9A29'
+             pantryColor='#F1B563'
+             shoppingColor='#F1B563'/>
            <RecipeFeed navigator={navigator}/>
          </View>
       );
@@ -32,9 +32,9 @@ export class MainView extends Component {
          <View style={styles.page}>
            <Toolbar
              navigator={navigator}
-             recipeColor='#009933'
-             pantryColor='#ccff99'
-             shoppingColor='#009933'/>
+             recipeColor='#F1B563'
+             pantryColor='#EC9A29'
+             shoppingColor='#F1B563'/>
            <Pantry/>
          </View>
       );

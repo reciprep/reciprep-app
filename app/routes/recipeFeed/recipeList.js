@@ -97,17 +97,16 @@ export class RecipeList extends Component{
 
   render(){
     return(
-      <View style={{flex:1}}>
+      <View style={{flex:1,backgroundColor:'#EFE9F4'}}>
         <View style={styles.actionBar}>
           <SearchBar
-            lightTheme
             round
             onChangeText={(input) => this.setState({searchCriteria:input})}
             containerStyle= {styles.searchContainer}
             inputStyle={styles.searchInput}/>
           <CheckBox
             containerStyle={styles.checkBox}
-            textStyle={{color: 'white'}}
+            textStyle={{color: 'black'}}
             title='disable filter'
             onIconPress={this.toggleCheck}
             onPress={this.toggleCheck}
@@ -160,23 +159,24 @@ export class RecipeList extends Component{
 
 var styles = StyleSheet.create({
   actionBar:{
-    backgroundColor: '#07A0C3',
+    backgroundColor: '#EFE9F4',
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
   searchContainer:{
     flex:3,
-    backgroundColor: '#07A0C3',
-    borderBottomColor: '#07A0C3',
-    borderTopColor: '#07A0C3',
+    backgroundColor: '#EFE9F4',
+    borderBottomColor: '#EFE9F4',
+    borderTopColor: '#EFE9F4',
   },
   searchInput:{
+    backgroundColor: 'white'
   },
   checkBox:{
     flex: 2,
-    borderColor: '#07A0C3',
-    backgroundColor: '#07A0C3',
+    borderColor: '#EFE9F4',
+    backgroundColor: '#EFE9F4',
 
   },
   searchButton:{
@@ -184,7 +184,7 @@ var styles = StyleSheet.create({
     height: 30,
     borderRadius: 8,
     elevation: 2,
-    backgroundColor: '#4ABDAC',
+    backgroundColor: '#EC9A29',
   },
   iconContainer:{
     flex:1,
@@ -192,7 +192,8 @@ var styles = StyleSheet.create({
   newItem:{
     position: 'absolute',
     bottom:15,
-    right:15
+    right:15,
+    backgroundColor: '#EC9A29'
   }
 });
 

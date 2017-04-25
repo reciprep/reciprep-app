@@ -80,6 +80,7 @@ export class SignUp extends Component {
             title='Signup'
             buttonStyle={styles.signupButton}
             raised
+            textStyle={styles.buttonText}
             onPress={this._signupFunction}/>
         </View>
       </View>
@@ -95,7 +96,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   headerText:{
-    color: '#DFDCE3',
+    color: 'white',
     textAlign: 'center',
     fontWeight: '300',
     fontSize: 58
@@ -105,7 +106,7 @@ var styles = StyleSheet.create({
     // justifyContent: 'center'
   },
   inputGroup:{
-    backgroundColor:'#DFDCE3',
+    backgroundColor:'white',
     margin: 10,
     height: 70,
     borderRadius: 7,
@@ -127,7 +128,11 @@ var styles = StyleSheet.create({
     marginTop: 10,
     width: 300,
     borderRadius: 7,
+    backgroundColor: '#EFE9F4',
     alignSelf: 'center'
+  },
+  buttonText:{
+    color: 'black'
   }
 });
 

@@ -268,7 +268,6 @@ export class ShoppingPage extends React.Component {
     this.setState({modalVisible2: false});
   }
 
-<<<<<<< HEAD
   //the below modal will save the data and close the add ingredient button
   _closeModal3 = () =>{
     this.setState({modalVisible2: false});
@@ -289,7 +288,7 @@ export class ShoppingPage extends React.Component {
     this._closeModal();
   }
 
-  //below functions edit quantities in the shopping list for ingreidents 
+  //below functions edit quantities in the shopping list for ingreidents
   _Increment = () => {
     this.setState({text: (parseInt(this.state.text, 10) + 1).toString()})
   };

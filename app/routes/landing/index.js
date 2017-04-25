@@ -56,7 +56,7 @@ export class Landing extends Component {
 //BackgroundColor 30415D,015249, 4ABDAC
 var styles = StyleSheet.create({
   page:{
-    backgroundColor: '#4ABDAC',
+    backgroundColor: '#F1B563',
     flex: 1,
   }
 });

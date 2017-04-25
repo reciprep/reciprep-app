@@ -15,7 +15,8 @@ export class PantryHeader extends Component{
       <ListItem
         title={this.props.title}
         titleStyle={styles.text}
-        leftIcon={{name: this.props.icon}}
+        containerStyle={styles.container}
+        // leftIcon={{name: this.props.icon}}
         badge={{value: this.props.value}}/>
     );
   }
@@ -28,6 +29,9 @@ var styles = StyleSheet.create({
     fontWeight: 'bold',
     textShadowRadius: 100,
     textShadowColor: 'gray'
+  },
+  container:{
+    backgroundColor: 'white'
   }
 });
 

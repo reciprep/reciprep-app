@@ -35,17 +35,18 @@ export class PantrySubItem extends Component{
 var styles = StyleSheet.create({
   wrapper:{
     flex:1,
-    flexDirection:'row'
+    flexDirection:'row',
+    backgroundColor: '#BEBEBF'
   },
   buffer:{
     flex: 1,
-    backgroundColor: '#4ABDAC'
+    backgroundColor: '#BEBEBF'
   },
   subItem:{
     flex: 8,
     flexDirection: 'row',
-    backgroundColor: '#7ADBCD',
-    elevation: 30,
+    backgroundColor: '#BEBEBF',
+    elevation: 1,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: 'grey',

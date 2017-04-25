@@ -127,7 +127,7 @@ export class DetailInfo extends Component{
             <View style={styles.buttonContainer}>
               <Button buttonStyle={styles.rateButton}
                       title={"Rate"} fontSize={18}
-                      backgroundColor={"#dff442"} textStyle={styles.rateText}
+                      backgroundColor={"#EC9A29"} textStyle={styles.rateText}
                       onPress={this.rateRecipe}/>
             </View>
           </ScrollView>
@@ -239,7 +239,7 @@ var styles = StyleSheet.create({
     width: 150,
   },
   rateText:{
-    color:'black'
+    color:'white'
   },
   makeButton:{
     marginBottom: 5,

@@ -6,7 +6,7 @@ import PantryPage from './pantryPage'
 import PantryLoad from './pantryLoad'
 
 //static categories for loading in the real data from the database
-const categories = [
+var categories = [
   {
     title: 'MEATS',
     icon: 'opacity',
@@ -57,7 +57,10 @@ const categories = [
   }
 ]
 
-//pantry class 
+var newCategories=[]
+var stupidCount=0
+
+//pantry class
 export class Pantry extends Component {
 
   //function to be used later for formating our database data into useable data on the frontend
@@ -65,7 +68,7 @@ export class Pantry extends Component {
 
   }
 
-  //function to render our pantry view, pass in a route/navigator 
+  //function to render our pantry view, pass in a route/navigator
   //to decide which page to go to and how to navigate around within
   //our pantry pages
   //this additionally reorganizes our data into a way that is more readable by the UI
@@ -73,27 +76,24 @@ export class Pantry extends Component {
 
   _renderScene(route,navigator){
     if(route.index=='pantryPage'){
-      if(stupidCount==0){
-        console.log("IN INDEX")
-        for(i=0;i<route.data.length;i++){
-          subitem={
-            'title':route.data[i].name,
-            'type':route.data[i].measurement,
-            'value':route.data[i].value
-          }
-          for(j=0;j<categories.length;j++){
-            if(categories[j].title==route.data[i].category){
-              categories[j].subitems.push(subitem)
-              categories[j].value = categories[j].subitems.length
-            }
+      newCategories=JSON.parse(JSON.stringify(categories));
+      for(i=0;i<route.data.length;i++){
+        subitem={
+          'title':route.data[i].name,
+          'type':route.data[i].measurement,
+          'value':route.data[i].value
+        }
+        for(j=0;j<categories.length;j++){
+          if(categories[j].title==route.data[i].category){
+            newCategories[j].subitems.push(subitem)
+            newCategories[j].value = newCategories[j].subitems.length
           }
         }
-        console.log(categories)
-        stupidCount=1
       }
-      return <PantryPage navigator={navigator} data={categories}/>
-      stupidCount=0
+      return <PantryPage navigator={navigator} data={newCategories}/>
+      newCategories = []
     }
+
     if(route.index=='pantryLoad'){
       return <PantryLoad navigator={navigator}/>
     }
@@ -104,7 +104,7 @@ export class Pantry extends Component {
     return Navigator.SceneConfigs.FloatFromBottom
   }
 
-  //how we construct the view for our 
+  //how we construct the view for our
   constructor(props) {
     super(props);
     this.formatData = this.formatData.bind(this);
@@ -130,10 +130,10 @@ export class Pantry extends Component {
   }
 }
 
-//styling of the background for our pages incase they don't load instantly. 
+//styling of the background for our pages incase they don't load instantly.
 var styles = StyleSheet.create({
   page:{
-    backgroundColor: '#4ABDAC',
+    backgroundColor: '#F1B563',
     flex: 8,
   }
 });

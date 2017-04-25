@@ -54,7 +54,7 @@ export class RecipeLoad extends Component{
 var styles = StyleSheet.create({
   background:{
     flex: 1,
-    backgroundColor: '#4ABDAC',
+    backgroundColor: '#F1B563',
     justifyContent: 'center'
   },
   text:{

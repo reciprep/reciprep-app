@@ -3,11 +3,11 @@ import { StyleSheet, Alert, Text, ListView, ScrollView, View, Navigator, Modal, 
 import { Button, Icon, List, ListItem, FormLabel, FormInput, TouchableHighlight} from 'react-native-elements';
 
 
-//pantry loading class which will house a view for a loading page for the 
+//pantry loading class which will house a view for a loading page for the
 //pantry page
 export class PantryLoad extends Component{
 
-  //this function creates a pantry loading page and begins to pull in data from the 
+  //this function creates a pantry loading page and begins to pull in data from the
   //backend through http requests.
   loadPantry = async (navigator) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
@@ -24,7 +24,7 @@ export class PantryLoad extends Component{
       if(responseData['status'] == 'success'){
         navigator.push({index:'pantryPage',
                         data: responseData['data']['ingredients']})
-        console.log('request succeed with response', responseData)
+        console.log('Pantry GET request succeed with response', responseData)
       }
       else{
         console.log('request failed with response', responseData)
@@ -45,7 +45,7 @@ export class PantryLoad extends Component{
   render(){
     this.loadPantry(this.props.navigator)
     return(
-      <View>
+      <View style={{backgroundColor: '#F1B563',flex: 1}}>
         <Text>Loading Pantry...</Text>
       </View>
     );

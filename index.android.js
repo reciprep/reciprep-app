@@ -52,7 +52,7 @@ var styles = StyleSheet.create({
   },
   placeholder:{
     height:75,
-    backgroundColor: '#4ABDAC'
+    backgroundColor: '#F1B563'
   }
 });
 

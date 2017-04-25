@@ -52,12 +52,12 @@ export default class Splash extends Component {
 var styles = StyleSheet.create({
   mainView:{
     flex: 1,
-    backgroundColor: '#4ABDAC',
+    backgroundColor: '#F1B563',
     justifyContent: 'center'
 
   },
   headerText:{
-    color: '#DFDCE3',
+    color: 'white',
     textAlign: 'center',
     fontWeight: '300',
     fontSize: 58
