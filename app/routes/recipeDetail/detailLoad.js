@@ -7,6 +7,10 @@ import { Button, SearchBar, Icon, Card } from 'react-native-elements';
 detailInfo component */
 export class DetailLoad extends Component{
 
+  componentDidMount(){
+    this._loadDetails(this.props.navigator,this.props.recipeID)
+  }
+
   /* HTTP Get request, given a recipie_id and auth_token returns the Details
     of the recipe  */
   _loadDetails = async (navigator,recipeID) =>{
@@ -46,7 +50,6 @@ export class DetailLoad extends Component{
 
 
   render(){
-    this._loadDetails(this.props.navigator,this.props.recipeID)
     return(
       <View style={styles.modalContainer}>
         <View style={styles.modalInnerContainer}>

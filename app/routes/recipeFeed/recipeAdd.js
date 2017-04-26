@@ -227,7 +227,8 @@ var styles = StyleSheet.create({
   },
   buttonGroup:{
     flex:1,
-    flexDirection:'row'
+    flexDirection:'row',
+    marginBottom: 10
   },
   addButton:{
     flex:1,

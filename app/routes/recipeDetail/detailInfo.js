@@ -111,9 +111,6 @@ export class DetailInfo extends Component{
               <Button buttonStyle={styles.makeButton}
                       title={"Make"} fontSize={18}
                       onPress={()=>this.makeRecipe(this.props.data['recipe_id'])}/>
-              <Button buttonStyle={styles.shoppingButton}
-                      title={"Add to Cart"} fontSize={18}
-                      onPress={()=>this.addRecipeToCart(this.props.data)}/>
             </View>
             <View style={styles.ratingGroup}>
               <RecipeFeedStarRating rating={this.props.data['rating']} disabled={true}/>

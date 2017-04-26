@@ -9,6 +9,10 @@ import MainView from '../mainView';
 //Splash page that runs while loading occurs
 export default class Splash extends Component {
 
+  componentDidMount(){
+    this.autoLogin(this.props.navigator)
+  }
+
   //GET call, checks if valid Auth Token, if so moves to Main View if not
   // move to login page
   autoLogin = async (navigator) =>{
@@ -40,7 +44,6 @@ export default class Splash extends Component {
  }
 
   render() {
-    this.autoLogin(this.props.navigator)
     return(
       <View style={styles.mainView}>
         <Text style={styles.headerText}>ReciPrep</Text>

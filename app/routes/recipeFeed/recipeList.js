@@ -131,11 +131,12 @@ export class RecipeList extends Component{
             <RecipeDetail recipeID={this.state.modalRecipeID} closeModal={this.hideDetail} />
           </Modal>
           <ListView
+            enableEmptySections
             dataSource={this.state.dataSource}
             renderRow={(rowData) =>
               <RecipeCard
                 title={rowData.name}
-                imageSource={rowData.imageSource}
+                imageSource={rowData.image}
                 description={rowData.description}
                 showDetail={this.showDetail}
                 rating={rowData.rating}

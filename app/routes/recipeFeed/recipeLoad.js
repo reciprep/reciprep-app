@@ -6,6 +6,10 @@ import { Button, SearchBar, Icon, Card } from 'react-native-elements';
 //Import from Local
 export class RecipeLoad extends Component{
 
+  componentDidMount(){
+    this._loadRecipes(this.props.navigator)
+  }
+
   //HTTP GET request to receive all relevant recipes based on search criteria
   _loadRecipes = async (navigator) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
@@ -22,7 +26,7 @@ export class RecipeLoad extends Component{
       if(responseData['status'] == 'success'){
         navigator.push({index:'recipeList',
                         feedData: responseData['data']['recipes']});
-        console.log('request succeeded with responseData');
+        console.log('GET Recipes request succeeded with response',responseData);
       }
       else{
         console.log('request failed with response', responseData);
@@ -42,7 +46,6 @@ export class RecipeLoad extends Component{
 
 
   render(){
-    this._loadRecipes(this.props.navigator)
     return(
       <View style={styles.background}>
         <Text style={styles.text}>Loading Recipes...</Text>

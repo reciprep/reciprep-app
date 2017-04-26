@@ -8,10 +8,15 @@ import { Button, Icon, List, ListItem, FormLabel, FormInput, TouchableHighlight}
 
 export class PantryLoad extends Component{
 
+
+  componentDidMount(){
+    this.loadPantry(this.props.navigator)
+  }
   //this function creates a pantry loading page and begins to pull in data from the
   //backend through http requests.
   loadPantry =  async (navigator) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
+    console.log("LOAD PANTRY")
     fetch('http://10.0.2.2:8000/api/user/pantry',{
       method: 'GET',
       headers: {
@@ -25,7 +30,7 @@ export class PantryLoad extends Component{
       if(responseData['status'] == 'success'){
         navigator.push({index:'pantryPage',
                         data: responseData['data']['ingredients']})
-        console.log('Pantry GET request succeed with response', responseData)
+        // console.log('Pantry GET request succeed with response', responseData)
       }
       else{
         console.log('request failed with response', responseData)
@@ -36,6 +41,8 @@ export class PantryLoad extends Component{
       });
   }
 
+
+
   //this is our pantry load screen constructor and is used to bind our functions
   constructor(props) {
     super(props);
@@ -44,7 +51,6 @@ export class PantryLoad extends Component{
 
   //this renders our pantry loading screen for when we are loding in pantry ingredients
   render(){
-    this.loadPantry(this.props.navigator)
     return(
       <View style={styles.background}>
         <Text style={styles.text}>Loading Pantry...</Text>
