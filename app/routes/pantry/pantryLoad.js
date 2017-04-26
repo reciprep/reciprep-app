@@ -5,11 +5,12 @@ import { Button, Icon, List, ListItem, FormLabel, FormInput, TouchableHighlight}
 
 //pantry loading class which will house a view for a loading page for the
 //pantry page
+
 export class PantryLoad extends Component{
 
   //this function creates a pantry loading page and begins to pull in data from the
   //backend through http requests.
-  loadPantry = async (navigator) =>{
+  loadPantry =  async (navigator) =>{
     let auth_token = "Bearer " + await AsyncStorage.getItem('auth_token');
     fetch('http://10.0.2.2:8000/api/user/pantry',{
       method: 'GET',
@@ -45,12 +46,26 @@ export class PantryLoad extends Component{
   render(){
     this.loadPantry(this.props.navigator)
     return(
-      <View style={{backgroundColor: '#F1B563',flex: 1}}>
-        <Text>Loading Pantry...</Text>
+      <View style={styles.background}>
+        <Text style={styles.text}>Loading Pantry...</Text>
       </View>
     );
   }
 }
 
+
+var styles = StyleSheet.create({
+  background:{
+    flex: 1,
+    backgroundColor: '#F1B563',
+    justifyContent: 'center'
+  },
+  text:{
+    color: '#DFDCE3',
+    textAlign: 'center',
+    fontWeight: '300',
+    fontSize: 58
+  }
+})
 
 module.exports = PantryLoad;
