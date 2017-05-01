@@ -160,6 +160,11 @@ export class PantryPage extends React.Component {
     this.setState({modalVisible: false});
   }
 
+  _Remove = (navigator) =>{
+    this.setState({text: '0'});
+    this._closeModal(navigator);
+  }
+
   _closeModal4 = () =>{
     this.setState({modalVisible2: false});
   }
@@ -339,13 +344,13 @@ export class PantryPage extends React.Component {
                   name='done'
                   raised = {true}
                   color='#517fa4'/>*/}
-                <Icon
-                  onPress={() => this._Remove()}
+                {/* <Icon
+                  onPress={() => this._Remove(this.props.navigator)}
                   reverse
                   size = {15}
                   name='delete'
                   raised = {true}
-                  color='#517fa4'/>
+                  color='#517fa4'/> */}
               </View>
               <View style = {{marginTop:20}}>
                 <Button
@@ -389,6 +394,7 @@ export class PantryPage extends React.Component {
                   <Item label = "canned pumkin" value="canned pumkin"/>
                   <Item label = "capers" value="capers"/>
                   <Item label = "carrots" value="carrots"/>
+                  <Item label = "cheddar cheese" value="cheddar cheese"/>
                   <Item label = "chicken stock" value="chicken stock"/>
                   <Item label = "chipotle chile powder" value="chipotle chile powder"/>
                   <Item label = "cinnamon" value="cinnamon"/>
@@ -424,6 +430,7 @@ export class PantryPage extends React.Component {
                   <Item label = "pumkin pie spice" value="pumkin pie spice"/>
                   <Item label = "pure maple syrup" value="pure maple syrup"/>
                   <Item label = "salmon fillet" value="salmon fillet"/>
+                  <Item label = "salsa" value="salsa"/>
                   <Item label = "salt" value="salt"/>
                   <Item label = "shallots" value="shallots"/>
                   <Item label = "shrimp" value="shrimp"/>
@@ -432,6 +439,7 @@ export class PantryPage extends React.Component {
                   <Item label = "thick-cut bacon" value="thick-cut bacon"/>
                   <Item label = "thyme" value="thyme"/>
                   <Item label = "toasted walnuts" value="toasted walnuts"/>
+                  <Item label = "tortilla chips" value="tortilla chips"/>
                   <Item label = "vanilla extract" value="vanilla extract"/>
                   <Item label = "vegetable oil" value="vegetable oil"/>
                   <Item label = "water" value="water"/>
